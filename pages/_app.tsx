@@ -7,8 +7,8 @@ const theme = createMuiTheme({});
 const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
         <ThemeProvider theme={theme}>
+            <CssBaseline />
             <Head>
-                <CssBaseline />
                 <meta charSet="utf-8" />
                 <title>
                     Verseny    
