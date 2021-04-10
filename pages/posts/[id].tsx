@@ -1,8 +1,11 @@
 import prisma from "@lib/server/prisma";
-import { getAllPostIds, getPostData } from "../../lib/server/posts"
-/*
-export async function getStaticProps({  }){
-    const postData = getPostData()
+import Head from 'next/head'
+
+export async function getStaticProps({ params }){
+    const postData = await prisma.post.findOne({
+        where: {id: params.id},
+        include: { author: true}
+    });
     return{
         props: {
             postData
@@ -10,17 +13,29 @@ export async function getStaticProps({  }){
     }
 }
 export async function getStaticPaths(){
-    const paths = getAllPostIds()
+    const posts = await prisma.post.findMany({
+        include: {author: true},
+    });
+
     return {
-        paths,
+        paths: posts.map((post) => ({
+            params: {
+                id: post.id.toString()
+            }
+        })),
         fallback: false
-    }
+    };
 }
-*/
-export default function Post({ postData }){
+
+export default function Post( { postData } ){
     return (
         <>
-            {postData.title}
+            <Head>
+                <title>{postData.title}</title>
+            </Head>
+            <section>
+                Szia helo
+            </section>
         </>
     )
 }
