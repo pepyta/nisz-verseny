@@ -8,6 +8,7 @@ import { usePosts } from "@components/providers/PostsProvider";
 import { useSnackbar } from "notistack";
 import { useCategories } from "@components/providers/CategoryProvider";
 import Image from "next/image";
+import CategoryIcon from "@components/categories/CategoryIcon";
 
 const md = new MarkdownIt();
 
@@ -121,12 +122,7 @@ const PostCreation = () => {
                                     {cats.map((category) => (
                                         <ListItem>
                                             <ListItemAvatar style={{ height: 40, paddingTop: 4, paddingBottom: 4 }}>
-                                                <Image
-                                                    width={32}
-                                                    height={32}
-                                                    alt={category.name}
-                                                    src={`/img/icon/${category.id}.svg`}
-                                                />
+                                                <CategoryIcon category={category} />
                                             </ListItemAvatar>
                                             <ListItemText primary={category.name} />
                                             <ListItemSecondaryAction>

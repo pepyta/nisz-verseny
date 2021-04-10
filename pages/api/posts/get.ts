@@ -8,12 +8,7 @@ import { PostCategoryConnector } from ".prisma/client";
 import { Category } from ".prisma/client";
 
 export default wrapper(async (req) => {
-    const user = await getUser(req);
-
     const posts = await prisma.post.findMany({
-        where: {
-            userId: user.id,
-        },
         include: {
             author: true,
             PostCategoryConnector: {

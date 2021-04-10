@@ -31,9 +31,6 @@ export default function Post() {
             <Typography variant="body1">
                 {post.content}
             </Typography>
-            <Button variant="contained" color="primary" href="../index.tsx">
-                Kezdőoldalra!
-            </Button>
         </Container>
     )
 }

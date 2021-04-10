@@ -85,12 +85,12 @@ const SigninPage = () => {
                                                 {"Bejelentkezés"}
                                             </Button>
                                         </Grid>
-                                        <Grid item xs={3}>
+                                        <Grid item xs={12}>
                                             <Button
                                                 color="primary"
                                                 fullWidth
                                             >
-                                                {"Regisztráció"}
+                                                {"Új vagy még az oldalon? Regisztrálj!"}
                                             </Button>
                                         </Grid>
                                     </Grid>

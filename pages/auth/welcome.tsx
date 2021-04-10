@@ -29,6 +29,7 @@ const WelcomeScreen = () => {
             
             enqueueSnackbar(resp.message, { variant: "success" });
             setIcon(selected);
+            router.push("/");
         } catch(e) {
             setDisabled(false);
             enqueueSnackbar(e.message, {

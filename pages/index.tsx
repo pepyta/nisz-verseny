@@ -1,4 +1,5 @@
 import { usePosts } from "@components/providers/PostsProvider";
+import Tag from "@components/tags/Tag";
 import { Card, CardActionArea, CardContent, Container, Grid, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 
@@ -23,9 +24,16 @@ const IndexPage = () => {
                                     <Typography gutterBottom noWrap>
                                         {post.content}
                                     </Typography>
-                                    <Typography>    
+                                    <Typography gutterBottom>    
                                         {`${post.author.image} ${post.author.name}`}
                                     </Typography>
+                                    <Grid container spacing={2}>
+                                        {post.PostCategoryConnector.map(({ category }) => (
+                                            <Grid item>
+                                                <Tag category={category} />
+                                            </Grid>
+                                        ))}
+                                    </Grid>
                                 </CardContent>
                             </CardActionArea>
                         </Card>
