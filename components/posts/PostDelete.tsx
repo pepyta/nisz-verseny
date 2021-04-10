@@ -1,12 +1,11 @@
 import { Button, DialogTitle, Dialog, DialogContent, DialogContentText, DialogActions } from "@material-ui/core";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
-const PostDelete = () => {
-    const [open, setOpen] = React.useState(false);
-
+const PostDelete = ({ open, setOpen }: { open: boolean; setOpen: Dispatch<SetStateAction<boolean>> }) => {
     const handleClose = () => {
         setOpen(false);
     }
+
     return (
         <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
             <DialogTitle id="alert-dialog-title">{"Törlés"}</DialogTitle>
@@ -16,12 +15,8 @@ const PostDelete = () => {
             </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                    Igen
-            </Button>
-                <Button onClick={handleClose} color="primary">
-                    Nem
-            </Button>
+                <Button onClick={handleClose} color="primary">Nem</Button>
+                <Button onClick={handleClose} color="error">Igen</Button>
             </DialogActions>
         </Dialog>
     )

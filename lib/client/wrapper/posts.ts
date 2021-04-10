@@ -13,4 +13,10 @@ export default class PostsWrapper {
     public async get() {
         return await get<GetPostsResponseType>("/posts/get");
     }
+
+    public async delete(id: number) {
+        return await post("/posts/delete", {
+            body: JSON.stringify({id}),
+        });
+    }
 }

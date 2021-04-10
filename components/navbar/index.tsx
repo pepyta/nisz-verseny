@@ -1,4 +1,4 @@
-import { AppBar, Button, Card, CardContent, Container, Divider, Drawer, Grid, Hidden, IconButton, InputBase, List, ListItem, ListItemIcon, ListItemText, ListSubheader, makeStyles, Menu, MenuItem, Popover, StylesProvider, Toolbar, Typography, useMediaQuery } from "@material-ui/core";
+import { AppBar, Button, Card, CardContent, Container, Dialog, Divider, Drawer, Grid, Hidden, IconButton, InputBase, List, ListItem, ListItemIcon, ListItemText, ListSubheader, makeStyles, Menu, MenuItem, Popover, StylesProvider, Toolbar, Typography, useMediaQuery } from "@material-ui/core";
 import { ExitToAppRounded, HistoryRounded, HomeRounded, MenuRounded, SearchRounded } from "@material-ui/icons";
 import { useSession } from "next-auth/client"
 import { Fragment, PropsWithChildren, useState } from "react";
@@ -126,6 +126,9 @@ export default function Navbar({ children }: PropsWithChildren<{}>) {
 
     return (
         <Fragment>
+            <Dialog open={openSearch} onClose={() => setOpenSearch(false)}>
+
+            </Dialog>
             <AppBar style={{ zIndex: 1300 }}>
                 <div style={{ marginLeft: isDesktop ? DRAWER_WIDTH : 0 }}>
                     <Container maxWidth="sm" >

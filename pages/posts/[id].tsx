@@ -1,5 +1,5 @@
 import FullScreenLoader from "@components/loaders/FullScreenLoader";
-import { Card, CardActionArea, CardContent, makeStyles, Container, Grid, Typography, Button, IconButton } from "@material-ui/core";
+import { Card, CardActionArea, CardContent, makeStyles, Container, Grid, Typography, Button, IconButton, Menu, MenuItem, ListItemIcon } from "@material-ui/core";
 import { usePosts } from "@components/providers/PostsProvider";
 import Head from 'next/head';
 import { useRouter } from "next/router";
@@ -8,14 +8,20 @@ import Tag from "@components/tags/Tag";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import PostDelete from "../../components/posts/PostDelete"
+import { useState } from "react";
+import { EditRounded, MoreVertRounded } from "@material-ui/icons";
 
 const md = new MarkdownIt();
 
 export default function Post() {
+    const [deleteOpen, setDeleteOpen] = useState(false);
+
     const router = useRouter();
     const id = parseInt(router.query.id + "");
     const { posts, loaded } = usePosts();
     const post = posts.find((post) => post.id === id);
+
+    const [anchorEl, setAnchorEl] = useState<Element>();
 
     if (loaded && !post) router.push("/");
     if (!post) return (<FullScreenLoader />);
@@ -28,12 +34,41 @@ export default function Post() {
                 <Grid item xs={12} md={8}>
                     <Card className={classes.cardContent}>
                         <CardContent>
-                            <Typography variant="h5" component="h2" className={classes.header}>
-                                {post.title}
-                            </Typography>
+                            <Grid container spacing={2}>
+                                <Grid item style={{ width: "calc(100% - 64px)" }}>
+                                    <Typography variant="h5" component="h2" className={classes.header}>
+                                        {post.title}
+                                    </Typography>
+                                </Grid>
+                                <Grid item style={{ width: 48 }}>
+                                    <IconButton style={{ marginLeft: "auto" }} onClick={(e) => setAnchorEl(e.currentTarget)}>
+                                        <MoreVertRounded />
+                                    </IconButton>
+                                </Grid>
+                            </Grid>
                             <div dangerouslySetInnerHTML={{ __html: md.render(post.content + "") }} />
                         </CardContent>
                     </Card>
+                    <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={() => setAnchorEl(null)}
+                    >
+                        <MenuItem onClick={() => { }}>
+                            <ListItemIcon>
+                                <EditRounded fontSize="small" />
+                            </ListItemIcon>
+                            <Typography variant="inherit" noWrap>Szerkesztés</Typography>
+                        </MenuItem>
+                        <MenuItem onClick={() => setDeleteOpen(true)}>
+                            <ListItemIcon>
+                                <DeleteIcon fontSize="small" />
+                            </ListItemIcon>
+                            <Typography variant="inherit" noWrap>Törlés</Typography>
+                        </MenuItem>
+                    </Menu>
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Grid container spacing={2}>
@@ -73,14 +108,7 @@ export default function Post() {
                     </Grid>
                 </Grid>
             </Grid>
-            <Container>
-                <IconButton aria-label="edit">
-                    <EditIcon />
-                </IconButton>
-                <IconButton aria-label="delete" onClick={PostDelete}>
-                    <DeleteIcon />
-                </IconButton>
-            </Container>
+            <PostDelete open={deleteOpen} setOpen={setDeleteOpen} />
         </Container>
 
     )

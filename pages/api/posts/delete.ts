@@ -2,15 +2,19 @@ import prisma from "@lib/server/prisma";
 import { parseBody } from "next/dist/next-server/server/api-utils";
 import wrapper from "../../../lib/server/endpoint";
 
-export default wrapper(async (req) => {
-    const {id} = JSON.parse(req.body);
-    
+type DeletePostRequiredParameters = {
+    id: number;
+};
 
-    const deletePost = await prisma.post.delete({
+export default wrapper(async (req) => {
+    const { id }: DeletePostRequiredParameters = JSON.parse(req.body);
+
+    await prisma.post.delete({
         where: {
-            id: id
-        }
-    })
+            id,
+        },
+    });
+
     return{
         message: "Sikeresen törölted a bejegyzést!",
     };
