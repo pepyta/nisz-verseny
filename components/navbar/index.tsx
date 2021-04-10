@@ -268,8 +268,8 @@ export default function Navbar({ children }: PropsWithChildren<{}>) {
                         </Link>
                     ))}
                 </List>
-                {session && (
-                    <Link href ="../../pages/helper">
+                <Divider />
+                    <Link href ="/helper">
                         <ListItem button key ={"help-page"}>
                             <ListItemIcon>
                                 <HelpOutlineRoundedIcon />
@@ -277,7 +277,6 @@ export default function Navbar({ children }: PropsWithChildren<{}>) {
                             <ListItemText primary = {"Segítség!"} />
                         </ListItem>
                     </Link>
-                )}
                 {session && (
                     <LogoutButton />
                 )}

@@ -8,7 +8,6 @@ const LogoutButton = () => {
 
     return (
         <Fragment>
-            <Divider />
             <Dialog open={open} onClose={() => setOpen(false)} maxWidth="sm">
                 <DialogTitle>
                     Biztosan ki szeretnél jelentkenzi?

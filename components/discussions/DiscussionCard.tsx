@@ -1,9 +1,9 @@
 import { Category } from ".prisma/client";
 import { useDiscussions } from "@components/providers/DiscussionsWrapper";
 import DiscussionsWrapper from "@lib/client/wrapper/discussions";
-import { Card, CardContent, FilledInput, FormControl, IconButton, InputAdornment, InputLabel, List, ListItem, ListItemAvatar, ListItemText, useTheme } from "@material-ui/core";
+import { Card, CardContent, FilledInput, FormControl, IconButton, InputAdornment, InputLabel, List, ListItem, ListItemAvatar, ListItemText, Typography, useTheme } from "@material-ui/core";
 import { SendRounded } from "@material-ui/icons";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 const DiscussionCard = ({ category }: { category: Category }) => {
     const [message, setMessage] = useState("");
@@ -41,7 +41,12 @@ const DiscussionCard = ({ category }: { category: Category }) => {
                                 {message.sender.image}
                             </ListItemAvatar>
                             <ListItemText
-                                primary={message.sender.name}
+                                primary={<Fragment>
+                                    {message.sender.name}
+                                    <Typography variant="caption">
+                                        {` • ${new Date(message.sentat).toLocaleDateString()} ${new Date(message.sentat).toLocaleTimeString()}`}
+                                    </Typography>
+                                </Fragment>}
                                 secondary={message.content}
                             />
                         </ListItem>
