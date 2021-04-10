@@ -1,10 +1,13 @@
 import FullScreenLoader from "@components/loaders/FullScreenLoader";
-import { Card, CardActionArea, CardContent, makeStyles, Container, Grid, Typography, Button } from "@material-ui/core";
+import { Card, CardActionArea, CardContent, makeStyles, Container, Grid, Typography, Button, IconButton } from "@material-ui/core";
 import { usePosts } from "@components/providers/PostsProvider";
 import Head from 'next/head';
 import { useRouter } from "next/router";
 import MarkdownIt from "markdown-it";
 import Tag from "@components/tags/Tag";
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import PostDelete from "../../components/posts/PostDelete"
 
 const md = new MarkdownIt();
 
@@ -12,7 +15,6 @@ export default function Post() {
     const router = useRouter();
     const id = parseInt(router.query.id + "");
     const { posts, loaded } = usePosts();
-
     const post = posts.find((post) => post.id === id);
 
     if (loaded && !post) router.push("/");
@@ -71,7 +73,16 @@ export default function Post() {
                     </Grid>
                 </Grid>
             </Grid>
+            <Container>
+                <IconButton aria-label="edit">
+                    <EditIcon />
+                </IconButton>
+                <IconButton aria-label="delete" onClick={PostDelete}>
+                    <DeleteIcon />
+                </IconButton>
+            </Container>
         </Container>
+
     )
 }
 
