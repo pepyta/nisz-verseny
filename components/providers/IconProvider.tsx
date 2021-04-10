@@ -34,6 +34,7 @@ const IconProvider = ({ children }: PropsWithChildren<{}>) => {
 
             setLoaded(true);
         } catch(e) {
+            setLoaded(true);
             enqueueSnackbar(e.message, {
                 variant: "error",
             });

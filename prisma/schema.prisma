@@ -55,6 +55,7 @@ model User {
   PasswordAuthentication PasswordAuthentication?
   Message                Message[]
   @@map(name: "users")
+  Reaction Reaction[]
 }
 
 model VerificationRequest {
@@ -88,6 +89,7 @@ model Post {
   userId                Int
   PostCategoryConnector PostCategoryConnector[]
   @@map(name: "posts")
+  reactions Reaction[]
 }
 
 model PostCategoryConnector {
@@ -107,8 +109,8 @@ model Category {
   color String
 
   PostCategoryConnector PostCategoryConnector[]
+  Message               Message[]
   @@map(name: "categories")
-  Message Message[]
 }
 
 model Message {
@@ -118,7 +120,18 @@ model Message {
   category Category @relation(fields: [categoryId], references: [id])
   sentat   DateTime @default(now())
 
-  @@map(name: "messages")
-  userId Int
+  userId     Int
   categoryId String
+  @@map(name: "messages")
+}
+
+model Reaction {
+  id    Int    @id @default(autoincrement())
+  emoji String
+  post  Post   @relation(fields: [postId], references: [id])
+  user  User   @relation(fields: [userId], references: [id])
+
+  @@map(name: "reactions")
+  postId Int
+  userId Int
 }

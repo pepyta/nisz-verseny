@@ -25,7 +25,8 @@ const DiscussionsProvider = ({ children }: PropsWithChildren<{}>) => {
     const load = async () => {
         try {
             const resp = await wrapper.get();
-            setMessages(resp.data);
+            if(messages.length !== resp.data.length) setMessages(resp.data);
+            setTimeout(load, 5000);
         } catch(e) {}
     };
 

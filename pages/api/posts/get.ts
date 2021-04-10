@@ -6,6 +6,7 @@ import { Post } from ".prisma/client";
 import { User } from ".prisma/client";
 import { PostCategoryConnector } from ".prisma/client";
 import { Category } from ".prisma/client";
+import { Reaction } from ".prisma/client";
 
 export default wrapper(async (req) => {
     const posts = await prisma.post.findMany({
@@ -15,6 +16,11 @@ export default wrapper(async (req) => {
                 include: {
                     category: true
                 },
+            },
+            reactions: {
+                include: {
+                    user: true,
+                }
             },
         },
         orderBy: {
@@ -31,5 +37,8 @@ export type GetPostsResponseType = (Post & {
     author: User;
     PostCategoryConnector: (PostCategoryConnector & {
         category: Category;
+    })[];
+    reactions: (Reaction & {
+        user: User;
     })[];
 })[];
