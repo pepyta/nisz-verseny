@@ -274,7 +274,7 @@ export default function Navbar({ children }: PropsWithChildren<{}>) {
                             <ListItemIcon>
                                 <HelpOutlineRoundedIcon />
                             </ListItemIcon>
-                            <ListItemText primary = {"Segitség!"} />
+                            <ListItemText primary = {"Segítség!"} />
                         </ListItem>
                     </Link>
                 )}
