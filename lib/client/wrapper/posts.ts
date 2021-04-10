@@ -1,4 +1,5 @@
 import { CreatePostRequiredParameters, CreatePostResponseType } from "@pages/api/posts/create";
+import { EditPostRequiredParameters, EditPostResponseType } from "@pages/api/posts/edit";
 import { GetPostsResponseType } from "@pages/api/posts/get";
 import get from "../fetch/get";
 import post from "../fetch/post";
@@ -6,6 +7,12 @@ import post from "../fetch/post";
 export default class PostsWrapper {
     public async create(data: CreatePostRequiredParameters) {
         return await post<CreatePostResponseType>("/posts/create", {
+            body: JSON.stringify(data),
+        });
+    }
+    
+    public async edit(data: EditPostRequiredParameters) {
+        return await post<EditPostResponseType>("/posts/edit", {
             body: JSON.stringify(data),
         });
     }

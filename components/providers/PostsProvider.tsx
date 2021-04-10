@@ -18,6 +18,17 @@ export const usePosts = () => {
         loaded,
         addPost: (post: GetPostsResponseType[0]) => setPosts([post, ...posts]),
         removePost: (id: number) => setPosts([...posts].filter((el) => el.id !== id)),
+        editPost: (post: GetPostsResponseType[0]) => {
+            const newPosts = [...posts];
+
+            for(let i = 0; i < newPosts.length; i++) {
+                if(newPosts[i].id === post.id) {
+                    newPosts[i] = post;
+                }
+            }
+
+            setPosts(newPosts);
+        },
     }
 };
 

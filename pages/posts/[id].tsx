@@ -1,19 +1,19 @@
 import FullScreenLoader from "@components/loaders/FullScreenLoader";
-import { Card, CardActionArea, CardContent, makeStyles, Container, Grid, Typography, Button, IconButton, Menu, MenuItem, ListItemIcon } from "@material-ui/core";
+import { Card, CardContent, makeStyles, Container, Grid, Typography, IconButton, Menu, MenuItem, ListItemIcon } from "@material-ui/core";
 import { usePosts } from "@components/providers/PostsProvider";
-import Head from 'next/head';
 import { useRouter } from "next/router";
 import MarkdownIt from "markdown-it";
 import Tag from "@components/tags/Tag";
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import PostDelete from "../../components/posts/PostDelete"
 import { useState } from "react";
 import { EditRounded, MoreVertRounded } from "@material-ui/icons";
+import PostEdit from "@components/posts/PostEdit";
 
 const md = new MarkdownIt();
 
 export default function Post() {
+    const [editOpen, setEditOpen] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
 
     const router = useRouter();
@@ -55,7 +55,7 @@ export default function Post() {
                         open={Boolean(anchorEl)}
                         onClose={() => setAnchorEl(null)}
                     >
-                        <MenuItem onClick={() => { }}>
+                        <MenuItem onClick={() => setEditOpen(true)}>
                             <ListItemIcon>
                                 <EditRounded fontSize="small" />
                             </ListItemIcon>
@@ -107,6 +107,7 @@ export default function Post() {
                     </Grid>
                 </Grid>
             </Grid>
+            <PostEdit post={post} open={editOpen} setOpen={setEditOpen} />
             <PostDelete post={post} open={deleteOpen} setOpen={setDeleteOpen} />
         </Container>
 
