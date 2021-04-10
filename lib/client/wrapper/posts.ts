@@ -1,10 +1,16 @@
-import { CreatePostRequiredParameters } from "@pages/api/posts/create";
+import { CreatePostRequiredParameters, CreatePostResponseType } from "@pages/api/posts/create";
+import { GetPostsResponseType } from "@pages/api/posts/get";
+import get from "../fetch/get";
 import post from "../fetch/post";
 
 export default class PostsWrapper {
     public async create(data: CreatePostRequiredParameters) {
-        return await post("/posts/create", {
+        return await post<CreatePostResponseType>("/posts/create", {
             body: JSON.stringify(data),
         });
+    }
+
+    public async get() {
+        return await get<GetPostsResponseType>("/posts/get");
     }
 }

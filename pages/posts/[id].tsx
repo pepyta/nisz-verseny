@@ -1,40 +1,22 @@
-import prisma from "@lib/server/prisma";
+import FullScreenLoader from "@components/loaders/FullScreenLoader";
+import { usePosts } from "@components/providers/PostsProvider";
 import Head from 'next/head'
+import { useRouter } from "next/router";
 
-export async function getStaticProps({ params }){
-    const postData = await prisma.post.findOne({
-        where: {id: params.id},
-        include: { author: true}
-    });
-    return{
-        props: {
-            postData
-        }
-    }
-}
-export async function getStaticPaths(){
-    const posts = await prisma.post.findMany({
-        include: {author: true},
-    });
+export default function Post(){
+    const router = useRouter();
+    const id = parseInt(router.query.id+"");
+    const { posts, loaded } = usePosts();
 
-    return {
-        paths: posts.map((post) => ({
-            params: {
-                id: post.id.toString()
-            }
-        })),
-        fallback: false
-    };
-}
+    const post = posts.find((post) => post.id === id);
 
-export default function Post( { postData } ){
+    if(loaded && !post) router.push("/");
+    if(!post) return (<FullScreenLoader />); 
+
     return (
         <>
-            <Head>
-                <title>{postData.title}</title>
-            </Head>
             <section>
-                Szia helo
+                {post.title}
             </section>
         </>
     )
