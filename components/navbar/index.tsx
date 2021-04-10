@@ -14,6 +14,7 @@ import { usePosts } from "@components/providers/PostsProvider";
 import CategoryIcon from "@components/categories/CategoryIcon";
 import EditIcon from '@material-ui/icons/EditRounded';
 import SearchDialog from "@components/search/SearchDialog";
+import HelpOutlineRoundedIcon from '@material-ui/icons/HelpOutlineRounded';
 
 const DRAWER_WIDTH = 300;
 
@@ -267,6 +268,16 @@ export default function Navbar({ children }: PropsWithChildren<{}>) {
                         </Link>
                     ))}
                 </List>
+                {session && (
+                    <Link href ="../../pages/helper">
+                        <ListItem button key ={"help-page"}>
+                            <ListItemIcon>
+                                <HelpOutlineRoundedIcon />
+                            </ListItemIcon>
+                            <ListItemText primary = {"Segitség!"} />
+                        </ListItem>
+                    </Link>
+                )}
                 {session && (
                     <LogoutButton />
                 )}
