@@ -20,7 +20,7 @@ const RegisterPage = () => {
 
     const register: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
-        if(error) return;
+        if (error) return;
 
         try {
             setDisabled(true);
@@ -55,75 +55,84 @@ const RegisterPage = () => {
 
     return (
         <Paper className={classes.paperContainer} >
-        <Container maxWidth="sm">
-            <Grid
-                container
-                alignContent={"center"}
-                alignItems={"center"}
-                className={classes.container}
-            > 
-                <Grid item>
-                    <form onSubmit={register}>
-                        <Card className={classes.item}>
-                            <CardContent className={classes.cardContent}>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12}>
-                                        <Typography variant="h5" component="h2">
-                                            Regisztráció
+            <Container maxWidth="sm">
+                <Grid
+                    container
+                    alignContent={"center"}
+                    alignItems={"center"}
+                    className={classes.container}
+                >
+                    <Grid item>
+                        <form onSubmit={register}>
+                            <Card className={classes.item}>
+                                <CardContent className={classes.cardContent}>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12}>
+                                            <Typography variant="h5" component="h2">
+                                                Regisztráció
                                         </Typography>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                fullWidth
+                                                label={"Email cím"}
+                                                type="email"
+                                                value={email}
+                                                onChange={({ target: { value } }) => setEmail(value)}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                fullWidth
+                                                label={"Publikus név"}
+                                                value={name}
+                                                onChange={({ target: { value } }) => setName(value)}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                fullWidth
+                                                type={"password"}
+                                                label={"Jelszó"}
+                                                value={password}
+                                                onChange={({ target: { value } }) => setPassword(value)}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                fullWidth
+                                                type={"password"}
+                                                label={"Jelszó újra"}
+                                                value={passwordAgain}
+                                                onChange={({ target: { value } }) => setPasswordAgain(value)}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <Button
+                                                type={"submit"}
+                                                fullWidth
+                                                disabled={!!error || disabled}
+                                                variant="contained"
+                                            >
+                                                {error || "Regisztrálás"}
+                                            </Button>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <Button
+                                                onClick={() => router.push("/auth/signin")}
+                                                color="primary"
+                                                fullWidth
+                                            >
+                                                {"Mégis csak be szeretnél jelentkezni?"}
+                                            </Button>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            fullWidth
-                                            label={"Email cím"}
-                                            type="email"
-                                            value={email}
-                                            onChange={({ target: { value } }) => setEmail(value)}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            fullWidth
-                                            label={"Publikus név"}
-                                            value={name}
-                                            onChange={({ target: { value } }) => setName(value)}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            fullWidth
-                                            type={"password"}
-                                            label={"Jelszó"}
-                                            value={password}
-                                            onChange={({ target: { value } }) => setPassword(value)}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            fullWidth
-                                            type={"password"}
-                                            label={"Jelszó újra"}
-                                            value={passwordAgain}
-                                            onChange={({ target: { value } }) => setPasswordAgain(value)}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Button
-                                            type={"submit"}
-                                            fullWidth
-                                            disabled={!!error || disabled}
-                                            variant="contained"
-                                        >
-                                            {error || "Regisztrálás"}
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-                            </CardContent>
-                        </Card>
-                    </form>
+                                </CardContent>
+                            </Card>
+                        </form>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Container>
+            </Container>
         </Paper>
     );
 };

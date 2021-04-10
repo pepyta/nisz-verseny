@@ -87,7 +87,7 @@ const SigninPage = () => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Button
-                                                onClick={() => router.push("/auth/signin")}
+                                                onClick={() => router.push("/auth/register")}
                                                 color="primary"
                                                 fullWidth
                                             >

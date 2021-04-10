@@ -9,6 +9,7 @@ import PostDelete from "../../components/posts/PostDelete"
 import { useState } from "react";
 import { EditRounded, MoreVertRounded } from "@material-ui/icons";
 import PostEdit from "@components/posts/PostEdit";
+import { useSession } from "next-auth/client";
 
 const md = new MarkdownIt();
 
@@ -20,6 +21,7 @@ export default function Post() {
     const id = parseInt(router.query.id + "");
     const { posts, loaded } = usePosts();
     const post = posts.find((post) => post.id === id);
+    const [session] = useSession();
 
     const [anchorEl, setAnchorEl] = useState<Element>();
     const classes = useStyles();
@@ -39,11 +41,13 @@ export default function Post() {
                                         {post.title}
                                     </Typography>
                                 </Grid>
-                                <Grid item style={{ width: 48 }}>
-                                    <IconButton style={{ marginLeft: "auto" }} onClick={(e) => setAnchorEl(e.currentTarget)}>
-                                        <MoreVertRounded />
-                                    </IconButton>
-                                </Grid>
+                                {session?.user?.email === post.author.email && (
+                                    <Grid item style={{ width: 48 }}>
+                                        <IconButton style={{ marginLeft: "auto" }} onClick={(e) => setAnchorEl(e.currentTarget)}>
+                                            <MoreVertRounded />
+                                        </IconButton>
+                                    </Grid>
+                                )}
                             </Grid>
                             <div dangerouslySetInnerHTML={{ __html: md.render(post.content + "") }} />
                         </CardContent>
