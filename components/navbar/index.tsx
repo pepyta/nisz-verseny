@@ -202,11 +202,11 @@ export default function Navbar({ children }: PropsWithChildren<{}>) {
                 {session && (
                     <Fragment>
                         <Grid container spacing={2} alignItems="center" style={{ padding: "24px 16px" }}>
-                                <Link href="/auth/welcome">
-                            <Grid item style={{ fontSize: 24, textDecoration: "none", cursor: "pointer" }}>
+                            <Link href="/auth/welcome">
+                                <Grid item style={{ fontSize: 24, textDecoration: "none", cursor: "pointer" }}>
                                     {icon}
-                            </Grid>
-                                </Link>
+                                </Grid>
+                            </Link>
                             <Grid item>
                                 <Typography variant="body1">
                                     <b>{session.user.name}</b>
@@ -246,12 +246,14 @@ export default function Navbar({ children }: PropsWithChildren<{}>) {
                     <ListSubheader component="div" id="nested-list-subheader">Kategóriák</ListSubheader>
                 }>
                     {categories.map((category, index) => (
-                        <ListItem button key={category.id}>
-                            <ListItemIcon>
-                                <CategoryIcon category={category} />
-                            </ListItemIcon>
-                            <ListItemText primary={category.name} />
-                        </ListItem>
+                        <Link href={`/categories/${category.id}`}>
+                            <ListItem button key={category.id}>
+                                <ListItemIcon>
+                                    <CategoryIcon category={category} />
+                                </ListItemIcon>
+                                <ListItemText primary={category.name} />
+                            </ListItem>
+                        </Link>
                     ))}
                 </List>
                 {session && (
