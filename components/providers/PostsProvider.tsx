@@ -17,6 +17,7 @@ export const usePosts = () => {
         posts,
         loaded,
         addPost: (post: GetPostsResponseType[0]) => setPosts([post, ...posts]),
+        removePost: (id: number) => setPosts([...posts].filter((el) => el.id !== id)),
     }
 };
 

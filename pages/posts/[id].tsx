@@ -22,11 +22,10 @@ export default function Post() {
     const post = posts.find((post) => post.id === id);
 
     const [anchorEl, setAnchorEl] = useState<Element>();
+    const classes = useStyles();
 
     if (loaded && !post) router.push("/");
     if (!post) return (<FullScreenLoader />);
-
-    const classes = useStyles();
 
     return (
         <Container maxWidth="lg" >
@@ -108,7 +107,7 @@ export default function Post() {
                     </Grid>
                 </Grid>
             </Grid>
-            <PostDelete open={deleteOpen} setOpen={setDeleteOpen} />
+            <PostDelete post={post} open={deleteOpen} setOpen={setDeleteOpen} />
         </Container>
 
     )

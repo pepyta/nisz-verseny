@@ -13,6 +13,7 @@ import FuseJS from "fuse.js";
 import { usePosts } from "@components/providers/PostsProvider";
 import CategoryIcon from "@components/categories/CategoryIcon";
 import EditIcon from '@material-ui/icons/EditRounded';
+import SearchDialog from "@components/search/SearchDialog";
 
 const DRAWER_WIDTH = 300;
 
@@ -126,9 +127,6 @@ export default function Navbar({ children }: PropsWithChildren<{}>) {
 
     return (
         <Fragment>
-            <Dialog open={openSearch} onClose={() => setOpenSearch(false)}>
-
-            </Dialog>
             <AppBar style={{ zIndex: 1300 }}>
                 <div style={{ marginLeft: isDesktop ? DRAWER_WIDTH : 0 }}>
                     <Container maxWidth="sm" >
@@ -138,19 +136,18 @@ export default function Navbar({ children }: PropsWithChildren<{}>) {
                                     <MenuRounded />
                                 </IconButton>
                             </Hidden>
-
                             <Search>
                                 <SearchIconWrapper>
                                     <SearchRounded />
                                 </SearchIconWrapper>
                                 <StyledInputBase
+                                    onFocus={(e) => {
+                                        e.preventDefault();
+                                        e.currentTarget.blur();
+                                        setOpenSearch(true);
+                                    }}
                                     placeholder="Keresés..."
                                     value={search}
-                                    onChange={(e) => {
-                                        handleClick(e);
-                                        setSearch(e.target.value);
-                                    }}
-                                    inputProps={{ 'aria-label': 'search' }}
                                 />
                             </Search>
                             <Popover
@@ -278,6 +275,7 @@ export default function Navbar({ children }: PropsWithChildren<{}>) {
             <div className={classes.content}>
                 {children}
             </div>
+            <SearchDialog open={openSearch} setOpen={setOpenSearch} />
         </Fragment>
     )
 }

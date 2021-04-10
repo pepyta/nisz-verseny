@@ -1,7 +1,35 @@
+import { usePosts } from "@components/providers/PostsProvider";
+import PostsWrapper from "@lib/client/wrapper/posts";
 import { Button, DialogTitle, Dialog, DialogContent, DialogContentText, DialogActions } from "@material-ui/core";
-import React, { Dispatch, SetStateAction } from "react";
+import { GetPostsResponseType } from "@pages/api/posts/get";
+import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
+import React, { Dispatch, SetStateAction, useState } from "react";
 
-const PostDelete = ({ open, setOpen }: { open: boolean; setOpen: Dispatch<SetStateAction<boolean>> }) => {
+const PostDelete = ({ open, setOpen, post }: { open: boolean; setOpen: Dispatch<SetStateAction<boolean>>; post: GetPostsResponseType[0] }) => {
+    const wrapper = new PostsWrapper();
+    const { enqueueSnackbar } = useSnackbar();
+    const [disabled, setDisabled] = useState(false);
+    const { posts, removePost } = usePosts();
+    const router = useRouter();
+
+    const remove = async () => {
+        try {
+            setDisabled(true);
+            const resp = await wrapper.delete(post.id);
+            enqueueSnackbar(resp.message, { variant: "success" });
+            removePost(post.id);
+            router.push("/");
+            handleClose();
+        } catch(e) {
+            enqueueSnackbar(e.message, {
+                variant: "error",
+            });
+        }
+
+        setDisabled(false);
+    };
+
     const handleClose = () => {
         setOpen(false);
     }
@@ -16,7 +44,8 @@ const PostDelete = ({ open, setOpen }: { open: boolean; setOpen: Dispatch<SetSta
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} color="primary">Nem</Button>
-                <Button onClick={handleClose} color="error">Igen</Button>
+                {/* @ts-ignore */}
+                <Button onClick={remove} color="error">Igen</Button>
             </DialogActions>
         </Dialog>
     )
