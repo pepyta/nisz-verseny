@@ -1,4 +1,4 @@
-export const API_ENDPOINT = process.env.NODE_ENV === "production" ? "http://csapat05-versenydonto.nisz.hu/api" : "http://localhost:3000/api";
+export const API_ENDPOINT = process.env.NODE_ENV === "production" ? "http://csapat05-versenydonto.nisz.hu/nodejs/api" : "http://localhost:8150/api";
 
 const get = async <T = {}>(input: RequestInfo, init?: RequestInit): Promise<{ message: string; data: T }> => {
     const resp = await fetch(`${API_ENDPOINT}${input}`, {

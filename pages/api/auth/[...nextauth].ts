@@ -5,6 +5,9 @@ import Providers from "next-auth/providers";
 import bcrypt from "bcryptjs";
 
 export default NextAuth({
+    session: {
+        jwt: true,
+    },
     providers: [
         Providers.Credentials({
             name: "Credentials",

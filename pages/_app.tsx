@@ -3,7 +3,15 @@ import { AppProps } from 'next/dist/next-server/lib/router/router';
 import Head from "next/head";
 import { SnackbarProvider } from 'notistack';
 
-const theme = createMuiTheme({});
+const theme = createMuiTheme({
+    components: {
+        MuiTextField: {
+            defaultProps: {
+                variant: "filled",
+            },
+        },
+    },
+});
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
     return (

@@ -11,6 +11,9 @@ export type RegistrationRequiredParameters = {
 export default wrapper(async (req) => {
     const { name, password, email }: RegistrationRequiredParameters = JSON.parse(req.body);
 
+    const user = await prisma.user.findUnique({ where: { email } });
+    if(user) throw new Error("Ezzel az email címmel már regisztráltak!");
+
     await prisma.user.create({
         data: {
             name,
