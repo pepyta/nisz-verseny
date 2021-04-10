@@ -65,7 +65,7 @@ const RegisterPage = () => {
                 <Grid item>
                     <form onSubmit={register}>
                         <Card className={classes.item}>
-                            <CardContent>
+                            <CardContent className={classes.cardContent}>
                                 <Grid container spacing={2}>
                                     <Grid item xs={12}>
                                         <Typography variant="h5" component="h2">
@@ -135,6 +135,9 @@ const useStyles = makeStyles(() => ({
     },
     container: {
         minHeight: "100vh",
+    },
+    cardContent: {
+        backgroundColor: "#f7f9fb",
     },
     item: {
         marginTop: "auto",

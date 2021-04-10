@@ -50,7 +50,7 @@ const SigninPage = () => {
                     <Grid item>
                         <form onSubmit={login}>
                             <Card className={classes.item}>
-                                <CardContent>
+                                <CardContent className={classes.cardContent}>
                                     <Grid container spacing={2}>
                                         <Grid item xs={12}>
                                             <Typography variant="h5" component="h2" >
@@ -85,6 +85,14 @@ const SigninPage = () => {
                                                 {"Bejelentkezés"}
                                             </Button>
                                         </Grid>
+                                        <Grid item xs={3}>
+                                            <Button
+                                                color="primary"
+                                                fullWidth
+                                            >
+                                                {"Regisztráció"}
+                                            </Button>
+                                        </Grid>
                                     </Grid>
                                 </CardContent>
                             </Card>
@@ -103,6 +111,9 @@ const useStyles = makeStyles(() => ({
     },
     container: {
         minHeight: "100vh",
+    },
+    cardContent: {
+        backgroundColor: "#f7f9fb",
     },
     item: {
         marginTop: "auto",
