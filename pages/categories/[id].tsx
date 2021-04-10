@@ -2,7 +2,7 @@ import CategoryIcon from "@components/categories/CategoryIcon";
 import PostItem from "@components/posts/PostItem";
 import { useCategories } from "@components/providers/CategoryProvider";
 import { usePosts } from "@components/providers/PostsProvider";
-import { Card, CardActions, CardContent, Container, Divider, Grid, Tab, Tabs, Typography } from "@material-ui/core";
+import { Card, CardActions, CardContent, Container, createMuiTheme, Divider, Grid, Tab, Tabs, ThemeProvider, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 
@@ -33,14 +33,16 @@ const CategoryPage = () => {
                                 </Grid>
                             </Grid>
                         </CardContent>
-                        <Tabs
-                            value={selected}
-                            onChange={(e, val) => setSelected(val)}
+                        <ThemeProvider theme={createMuiTheme({ palette: { primary: { main: category.color,} }})}>
+                            <Tabs
+                                value={selected}
+                                onChange={(e, val) => setSelected(val)}
 
-                        >
-                            <Tab value={"POSTS"} label="Bejegyzések" />
-                            <Tab value={"DISCUSSIONS"} label="Beszélgetés" />
-                        </Tabs>
+                            >
+                                <Tab value={"POSTS"} label="Bejegyzések" />
+                                <Tab value={"DISCUSSIONS"} label="Beszélgetés" />
+                            </Tabs>
+                        </ThemeProvider>
                     </Card>
                 </Container>
             </Grid>
