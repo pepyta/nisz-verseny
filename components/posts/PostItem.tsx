@@ -17,9 +17,6 @@ const PostItem = ({ post }: { post: GetPostsResponseType[0] }) => {
                     <Typography gutterBottom noWrap>
                         {(post.content+"").replaceAll(/[^ 0-9a-zA-Zöüóőúéáűí,.-]/g, "")}
                     </Typography>
-                    <Typography gutterBottom>    
-                        {`${post.author.image} ${post.author.name}`}
-                    </Typography>
                     <Grid container spacing={2}>
                         {post.PostCategoryConnector.map(({ category }) => (
                             <Grid item>

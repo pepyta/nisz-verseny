@@ -64,7 +64,7 @@ const PostCreation = () => {
     return (
         <Fragment>
             <div className={classes.root}>
-                <Grow in={router.pathname == "/"}>
+                <Grow in={["/", "/posts/my"].includes(router.pathname)}>
                     <Fab variant="extended" color="primary" onClick={() => setOpen(true)}>
                         <AddRounded />
                         Bejegyzés létrehozása

@@ -1,5 +1,5 @@
 import { AppBar, Button, Card, CardContent, Container, Divider, Drawer, Grid, Hidden, IconButton, InputBase, List, ListItem, ListItemIcon, ListItemText, ListSubheader, makeStyles, Menu, MenuItem, Popover, StylesProvider, Toolbar, Typography, useMediaQuery } from "@material-ui/core";
-import { ExitToAppRounded, HomeRounded, MenuRounded, SearchRounded } from "@material-ui/icons";
+import { ExitToAppRounded, HistoryRounded, HomeRounded, MenuRounded, SearchRounded } from "@material-ui/icons";
 import { useSession } from "next-auth/client"
 import { Fragment, PropsWithChildren, useState } from "react";
 import { experimentalStyled as styled, alpha, useTheme } from '@material-ui/core/styles';
@@ -12,6 +12,7 @@ import Image from "next/image";
 import FuseJS from "fuse.js";
 import { usePosts } from "@components/providers/PostsProvider";
 import CategoryIcon from "@components/categories/CategoryIcon";
+import EditIcon from '@material-ui/icons/EditRounded';
 
 const DRAWER_WIDTH = 300;
 
@@ -228,6 +229,16 @@ export default function Navbar({ children }: PropsWithChildren<{}>) {
                             <ListItemText primary={"Főoldal"} />
                         </ListItem>
                     </Link>
+                    {session && (
+                        <Link href="/posts/my">
+                            <ListItem button key={"my-posts-button"}>
+                                <ListItemIcon>
+                                    <EditIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={"Saját bejegyzések"} />
+                            </ListItem>
+                        </Link>
+                    )}
                 </List>
                 {!session && (
                     <Fragment>

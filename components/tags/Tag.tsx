@@ -8,7 +8,7 @@ const Tag = ({ category }: { category: Category }) => {
     const { categories } = useCategories();
 
     return (
-        <div className={classes.root} style={{ backgroundColor: categories.find((el) => category.id === el.id).color }}>
+        <div className={classes.root} style={{ backgroundColor: categories.find((el) => category.id === el.id)?.color }}>
             <Grid container spacing={1} alignItems={"center"}>
                 <Grid item>    
                     {category.name}
