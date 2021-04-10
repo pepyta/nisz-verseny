@@ -54,7 +54,10 @@ const tabhoz = makeStyles((theme: Theme) => ({
 const kartyahoz = makeStyles({
     root: {
         maxWidth: '80%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
     }
+
 })
 
 const helpPage = () => {
