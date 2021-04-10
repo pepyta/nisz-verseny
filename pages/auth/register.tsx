@@ -1,5 +1,5 @@
 import UserWrapper from "@lib/client/wrapper/user";
-import { Button, Card, CardContent, Container, Grid, makeStyles, TextField, Typography } from "@material-ui/core";
+import { Button, Card, CardContent, Container, Grid, makeStyles, TextField, Typography, Paper } from "@material-ui/core";
 import { signIn } from "next-auth/client";
 import { useSnackbar } from "notistack";
 import { FormEventHandler, useState } from "react";
@@ -54,6 +54,7 @@ const RegisterPage = () => {
     const classes = useStyles();
 
     return (
+        <Paper className={classes.paperContainer} >
         <Container maxWidth="sm">
             <Grid
                 container
@@ -123,10 +124,15 @@ const RegisterPage = () => {
                 </Grid>
             </Grid>
         </Container>
+        </Paper>
     );
 };
 
 const useStyles = makeStyles(() => ({
+    paperContainer: {
+        backgroundImage: 'url(../img/background/register_background.png)',
+        backgroundSize: "cover",
+    },
     container: {
         minHeight: "100vh",
     },

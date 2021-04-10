@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Container, Grid, makeStyles, TextField, Typography } from "@material-ui/core";
+import { Button, Card, CardContent, Container, Grid, makeStyles, TextField, Typography, Paper} from "@material-ui/core";
 import { signIn, useSession } from "next-auth/client";
 import { useSnackbar } from "notistack";
 import { FormEventHandler, useState } from "react";
@@ -14,10 +14,7 @@ const SigninPage = () => {
 
     const router = useRouter();
 
-    if(session) {
-        router.push("/");
-        enqueueSnackbar("Sikeres bejelentkezés!", { variant: "success" });
-    };
+    if(session) router.push("/");
 
     const login: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
@@ -42,62 +39,68 @@ const SigninPage = () => {
     const classes = useStyles();
 
     return (
-        <Container maxWidth="sm">
-            <Grid
-                container
-                alignContent={"center"}
-                alignItems={"center"}
-                className={classes.container}
-            > 
-                <Grid item>
-                    <form onSubmit={login}>
-                        <Card className={classes.item}>
-                            <CardContent>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12}>
-                                        <Typography variant="h5" component="h2">
-                                            Bejelentkezés
-                                        </Typography>
+        <Paper className={classes.paperContainer} >
+            <Container maxWidth="sm">
+                <Grid
+                    container
+                    alignContent={"left"}
+                    alignItems={"center"}
+                    className={classes.container}
+                > 
+                    <Grid item>
+                        <form onSubmit={login}>
+                            <Card className={classes.item}>
+                                <CardContent>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12}>
+                                            <Typography variant="h5" component="h2" >
+                                                Bejelentkezés
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                fullWidth
+                                                label={"Email cím"}
+                                                type="email"
+                                                value={email}
+                                                onChange={({ target: { value } }) => setEmail(value)}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                fullWidth
+                                                type={"password"}
+                                                label={"Jelszó"}
+                                                value={password}
+                                                onChange={({ target: { value } }) => setPassword(value)}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <Button
+                                                type={"submit"}
+                                                fullWidth
+                                                disabled={disabled}
+                                                variant="contained"
+                                            >
+                                                {"Bejelentkezés"}
+                                            </Button>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            fullWidth
-                                            label={"Email cím"}
-                                            type="email"
-                                            value={email}
-                                            onChange={({ target: { value } }) => setEmail(value)}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            fullWidth
-                                            type={"password"}
-                                            label={"Jelszó"}
-                                            value={password}
-                                            onChange={({ target: { value } }) => setPassword(value)}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Button
-                                            type={"submit"}
-                                            fullWidth
-                                            disabled={disabled || !!session}
-                                            variant="contained"
-                                        >
-                                            {"Bejelentkezés"}
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-                            </CardContent>
-                        </Card>
-                    </form>
+                                </CardContent>
+                            </Card>
+                        </form>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Container>
+            </Container>
+        </Paper>
     );
 };
 
 const useStyles = makeStyles(() => ({
+    paperContainer: {
+        backgroundImage: 'url(../img/background/login_background.png)',
+        backgroundSize: "cover",
+    },
     container: {
         minHeight: "100vh",
     },
