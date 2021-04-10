@@ -53,6 +53,7 @@ model User {
 
   Post                   Post[]
   PasswordAuthentication PasswordAuthentication?
+  Message                Message[]
   @@map(name: "users")
 }
 
@@ -72,7 +73,7 @@ model PasswordAuthentication {
   user     User   @relation(fields: [userId], references: [id])
   password String
 
-  userId Int      @unique
+  userId Int @unique
   @@map(name: "password_authentication")
 }
 
@@ -107,4 +108,17 @@ model Category {
 
   PostCategoryConnector PostCategoryConnector[]
   @@map(name: "categories")
+  Message Message[]
+}
+
+model Message {
+  id       Int      @id @default(autoincrement())
+  content  String
+  sender   User     @relation(fields: [userId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id])
+  sentat   DateTime @default(now())
+
+  @@map(name: "messages")
+  userId Int
+  categoryId String
 }
