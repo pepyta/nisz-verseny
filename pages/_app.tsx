@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import Navbar from '@components/navbar';
 import { Fragment } from 'react';
 import DiscussionsProvider from '@components/providers/DiscussionsWrapper';
+import QuestionsProvider from '@components/providers/QuestionsProvider';
 
 const theme = createMuiTheme({
     components: {
@@ -51,9 +52,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                                     </Head>
                                     <IconProvider>
                                         <DiscussionsProvider>
-                                            <Wrapper>    
-                                                <Component {...pageProps} />
-                                            </Wrapper>
+                                            <QuestionsProvider>
+                                                <Wrapper>    
+                                                    <Component {...pageProps} />
+                                                </Wrapper>
+                                            </QuestionsProvider>
                                         </DiscussionsProvider>
                                     </IconProvider>
                                 </ThemeProvider>

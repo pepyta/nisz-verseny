@@ -54,8 +54,10 @@ model User {
   Post                   Post[]
   PasswordAuthentication PasswordAuthentication?
   Message                Message[]
+  Reaction               Reaction[]
+  Question               Question[]
+  Answer                 Answer[]
   @@map(name: "users")
-  Reaction Reaction[]
 }
 
 model VerificationRequest {
@@ -88,8 +90,8 @@ model Post {
 
   userId                Int
   PostCategoryConnector PostCategoryConnector[]
+  reactions             Reaction[]
   @@map(name: "posts")
-  reactions Reaction[]
 }
 
 model PostCategoryConnector {
@@ -108,8 +110,9 @@ model Category {
   name  String
   color String
 
-  PostCategoryConnector PostCategoryConnector[]
-  Message               Message[]
+  PostCategoryConnector     PostCategoryConnector[]
+  Message                   Message[]
+  QuestionCategoryConnector QuestionCategoryConnector[]
   @@map(name: "categories")
 }
 
@@ -131,7 +134,43 @@ model Reaction {
   post  Post   @relation(fields: [postId], references: [id])
   user  User   @relation(fields: [userId], references: [id])
 
-  @@map(name: "reactions")
   postId Int
   userId Int
+  @@map(name: "reactions")
+}
+
+model QuestionCategoryConnector {
+  id       Int      @id @default(autoincrement())
+  qustion  Question @relation(fields: [questionId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id])
+
+  questionId Int
+  categoryId String
+  @@map(name: "question_category_connectors")
+}
+
+model Question {
+  id      Int    @id @default(autoincrement())
+  title   String
+  content Json
+  user    User   @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+
+  QuestionCategoryConnector QuestionCategoryConnector[]
+  userId                    Int
+  answers                    Answer[]
+  @@map(name: "questions")
+}
+
+model Answer {
+  id       Int      @id @default(autoincrement())
+  content  String
+  marked   Boolean  @default(false)
+  user     User     @relation(fields: [userId], references: [id])
+  question Question @relation(fields: [questionId], references: [id])
+  createdAt DateTime @default(now())
+
+  userId Int
+  @@map(name: "answers")
+  questionId Int
 }
