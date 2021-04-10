@@ -88,14 +88,14 @@ const helpPage = () => {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                <Grid container spacing={1}>
+                <Grid container>
                     <Grid item xs={6}>
                         <Card className={kartyaClass.root}>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
                                     alt="Bejegyzés készítése"
-                                    height="200"
+                                    height="220"
                                     image="/img/gif/bejegyzeskeszit.gif"
                                     title="Bejegyzés készítése"
                                 />
@@ -117,7 +117,7 @@ const helpPage = () => {
                                 <CardMedia
                                     component="img"
                                     alt="Bejegyzés készítése"
-                                    height="200"
+                                    height="220"
                                     image="/img/gif/bejegyzestorles.gif"
                                     title="Bejegyzés készítése"
                                 />
