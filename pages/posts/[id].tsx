@@ -1,7 +1,7 @@
 import FullScreenLoader from "@components/loaders/FullScreenLoader";
-import { Card, CardActionArea, CardContent, Container, Grid, Typography, Button } from "@material-ui/core";
+import { Card, CardActionArea, CardContent, makeStyles, Container, Grid, Typography, Button } from "@material-ui/core";
 import { usePosts } from "@components/providers/PostsProvider";
-import Head from 'next/head'
+import Head from 'next/head';
 import { useRouter } from "next/router";
 
 export default function Post() {
@@ -14,23 +14,54 @@ export default function Post() {
     if (loaded && !post) router.push("/");
     if (!post) return (<FullScreenLoader />);
 
+    const classes = useStyles();
+
     return (
-        <Container maxWidth="lg">
-            <Grid item xs={8}>
-                <Typography variant="h4">
-                    {post.title}
-
-                </Typography>
-            </Grid>
-            <Grid item xs={4}>
-                <Typography variant="body2">
-                    {`${post.author.image} ${post.author.name}`}
-                </Typography>
-            </Grid>
-
-            <Typography variant="body1">
-                {post.content}
-            </Typography>
+        <Container maxWidth="lg" >
+                <Card className={classes.cardContent}>
+                    <CardContent>
+                        <Grid item xs={12}>
+                            <Typography variant="h4" className={classes.header}>
+                                {post.title}                     
+                            </Typography>
+                        </Grid>
+                    </CardContent>
+                </Card>
+            <Card className={classes.cardContent}>  
+                <CardContent>
+                    <Grid item xs={12}>
+                        <Typography variant="h5" component="h3" >
+                            {post.content}                     
+                        </Typography>
+                    </Grid>
+                </CardContent>
+            </Card>
+            <Card className={classes.cardContent}>  
+                <CardContent>
+                    <Grid item xs={12}>
+                        <Typography variant="h5" component="h5" className={classes.footer}>
+                            {`${post.author.image} ${post.author.name}`}                      
+                        </Typography>
+                    </Grid>
+                </CardContent>
+            </Card>
         </Container>
     )
 }
+
+const useStyles = makeStyles(() => ({
+    header: {
+        textAlign: "left",
+        fontWeight: "fontWeightBold",
+    },
+
+    footer: {
+        textAlign: "left",
+    },
+    
+    cardContent: {
+        marginTop: 3,
+        marginBottom: 3,
+        textAlign: "justify",
+    }
+}));
