@@ -1,6 +1,7 @@
 import FullScreenLoader from "@components/loaders/FullScreenLoader";
 import IconWrapper from "@lib/client/wrapper/icon";
 import WelcomeScreen from "@pages/auth/welcome";
+import { useSession } from "next-auth/client";
 import { useSnackbar } from "notistack";
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useState } from "react";
 
@@ -15,19 +16,20 @@ type IconContextType = {
 const IconProvider = ({ children }: PropsWithChildren<{}>) => {
     const [icon, setIcon] = useState<string>(null);
     const [loaded, setLoaded] = useState(false);
+    const [session] = useSession();
 
     const { enqueueSnackbar } = useSnackbar();
 
     const wrapper = new IconWrapper();
 
     useEffect(() => {
-        load();
+        if(session) load();
+        else setLoaded(true);
     }, []);
 
     const load = async () => {
         try {
             const resp = await wrapper.get();
-            console.log(resp);
             setIcon(resp);
 
             setLoaded(true);
@@ -42,7 +44,7 @@ const IconProvider = ({ children }: PropsWithChildren<{}>) => {
 
     return (
         <IconContext.Provider value={{ icon, setIcon }}>
-            {!icon ? <WelcomeScreen /> : children}
+            {!icon && session ? <WelcomeScreen /> : children}
         </IconContext.Provider>
     );
 };

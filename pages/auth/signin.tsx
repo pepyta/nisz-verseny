@@ -14,7 +14,10 @@ const SigninPage = () => {
 
     const router = useRouter();
 
-    if(session) router.push("/");
+    if(session) {
+        router.push("/");
+        enqueueSnackbar("Sikeres bejelentkezés!", { variant: "success" });
+    };
 
     const login: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
@@ -78,7 +81,7 @@ const SigninPage = () => {
                                         <Button
                                             type={"submit"}
                                             fullWidth
-                                            disabled={disabled}
+                                            disabled={disabled || !!session}
                                             variant="contained"
                                         >
                                             {"Bejelentkezés"}

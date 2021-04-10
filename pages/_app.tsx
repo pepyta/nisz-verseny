@@ -19,33 +19,33 @@ const theme = createMuiTheme({
 const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
         <Provider session={pageProps.session}>
-            <CssBaseline />
-            <UserProvider>
-                <SnackbarProvider>
-                    <ThemeProvider theme={theme}>
-                        <Head>
-                            <meta charSet="utf-8" />
-                            <title>
-                                Verseny    
+            <NoSsr>
+                <CssBaseline />
+                <UserProvider>
+                    <SnackbarProvider>
+                        <ThemeProvider theme={theme}>
+                            <Head>
+                                <meta charSet="utf-8" />
+                                <title>
+                                    Verseny
                             </title>
 
-                            <link
-                                rel="stylesheet"
-                                href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-                            />
-                            <link
-                                rel="stylesheet"
-                                href="https://fonts.googleapis.com/icon?family=Material+Icons"
-                            />
-                        </Head>
-                        <NoSsr>
+                                <link
+                                    rel="stylesheet"
+                                    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+                                />
+                                <link
+                                    rel="stylesheet"
+                                    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                                />
+                            </Head>
                             <IconProvider>
                                 <Component {...pageProps} />
                             </IconProvider>
-                        </NoSsr>
-                    </ThemeProvider>
-                </SnackbarProvider>
-            </UserProvider>
+                        </ThemeProvider>
+                    </SnackbarProvider>
+                </UserProvider>
+            </NoSsr>
         </Provider>
     );
 };
