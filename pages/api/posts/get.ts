@@ -6,17 +6,17 @@ import getUser from "../../../lib/server/getUser";
 export default wrapper(async (req) => {
     const user = await getUser(req);
 
-    const posts = await prisma.role.findMany({
+    const posts = await prisma.post.findMany({
         where: {
             userId: user.id,
         },
         include: {
-            author: true
+            author: true,
             PostCategoryConnector: {
                 include: {
                     category: true
-                }
-            }
+                },
+            },
         },
     });
 
