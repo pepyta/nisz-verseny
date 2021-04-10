@@ -123,11 +123,11 @@ const helpPage = () => {
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h6" component="h2">
-                                        Bejegyzés készítése
+                                        Bejegyzés törlése
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        Bejegyzés készitése nagyon egyszerű, csak kattintsunk a "bejegyzés létrehozása"
-                                        gombra, majd töltsük ki a kért adatokat.
+                                        Bejegyzést úgy tudunk törölni, hogy a posztunkban rákattintunk a három pontra,
+                                        majd a törlést választjuk.
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
