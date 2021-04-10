@@ -6,15 +6,36 @@ import { useSnackbar } from "notistack";
 import { FormEventHandler, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Picker } from 'emoji-mart-next'
+import IconWrapper from '@lib/client/wrapper/icon';
+import { useIcon } from '@components/providers/IconProvider';
 
 const WelcomeScreen = () => {
     const [session, loaded] = useSession();
     const router = useRouter();
     const { enqueueSnackbar } = useSnackbar();
     const [selected, setSelected] = useState("😀");
+    const [disabled, setDisabled] = useState(false);
     const [show, setShow] = useState(false);
 
     const classes = useStyles();
+
+    const wrapper = new IconWrapper();
+    const { icon, setIcon } = useIcon();
+
+    const set = async () => {
+        try {
+            setDisabled(true);
+            const resp = await wrapper.set(selected);
+            
+            enqueueSnackbar(resp.message, { variant: "success" });
+            setIcon(selected);
+        } catch(e) {
+            setDisabled(false);
+            enqueueSnackbar(e.message, {
+                variant: "error",
+            });
+        }
+    };
 
     return (
         <Container maxWidth="sm">
@@ -59,12 +80,12 @@ const WelcomeScreen = () => {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Button
+                                        onClick={set}
+                                        disabled={disabled}
                                         type={"submit"}
                                         fullWidth
                                         variant="contained"
-                                    >
-                                        Kiválasztás
-                                        </Button>
+                                    >Kiválasztás</Button>
                                 </Grid>
                             </Grid>
                         </CardContent>

@@ -1,3 +1,4 @@
+import IconProvider from '@components/providers/IconProvider';
 import UserProvider from '@components/providers/UserProvider';
 import { createMuiTheme, CssBaseline, NoSsr, ThemeProvider } from '@material-ui/core';
 import { Provider } from 'next-auth/client';
@@ -18,10 +19,10 @@ const theme = createMuiTheme({
 const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
         <Provider session={pageProps.session}>
+            <CssBaseline />
             <UserProvider>
                 <SnackbarProvider>
                     <ThemeProvider theme={theme}>
-                        <CssBaseline />
                         <Head>
                             <meta charSet="utf-8" />
                             <title>
@@ -38,7 +39,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                             />
                         </Head>
                         <NoSsr>
-                            <Component {...pageProps} />
+                            <IconProvider>
+                                <Component {...pageProps} />
+                            </IconProvider>
                         </NoSsr>
                     </ThemeProvider>
                 </SnackbarProvider>
