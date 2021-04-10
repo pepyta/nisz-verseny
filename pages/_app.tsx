@@ -24,7 +24,7 @@ const theme = createMuiTheme({
 const MyApp = ({ Component, pageProps }: AppProps) => {
     const router = useRouter();
 
-    const Wrapper = ["/auth/signin", "/auth/register", "/auth/welcome"].includes(router.pathname) ? Fragment : Navbar;
+    const Wrapper = ["/auth/signin", "/auth/register", "/auth/welcome", "/categories/[id]"].includes(router.pathname) ? Fragment : Navbar;
 
     return (
         <Provider session={pageProps.session}>

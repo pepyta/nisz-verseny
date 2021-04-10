@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 const PostItem = ({ post }: { post: GetPostsResponseType[0] }) => {
     const router = useRouter();
 
+    console.log((post.content+""));
+
     return  (
 
         <Card>
@@ -15,7 +17,7 @@ const PostItem = ({ post }: { post: GetPostsResponseType[0] }) => {
                         {post.title}
                     </Typography>
                     <Typography gutterBottom noWrap>
-                        {(post.content+"").replaceAll(/[^ 0-9a-zA-Zöüóőúéáűí,.-]/g, "")}
+                        {(post.content+"").replaceAll(/\n/g, " ").replaceAll(/[^ 0-9a-zA-Zöüóőúéáűí,.]/g, " ")}
                     </Typography>
                     <Grid container spacing={2}>
                         {post.PostCategoryConnector.map(({ category }) => (
