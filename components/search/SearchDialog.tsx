@@ -62,7 +62,7 @@ const SearchDialog = ({ open, setOpen }: { open: boolean; setOpen: Dispatch<SetS
                             results.map((result) => (
                                 <Link href={`/posts/${result.item.original.id}`}>
                                     <Grid item xs={12} onClick={() => setOpen(false)}>
-                                        <PostItem post={result.item.original} />
+                                        <PostItem post={result.item.original} showReactions={false} />
                                     </Grid>
                                 </Link>
                             ))

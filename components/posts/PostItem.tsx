@@ -12,7 +12,7 @@ import { Reaction } from '.prisma/client';
 import { CreateReactionResponseType } from '@pages/api/posts/react';
 import { useSession } from 'next-auth/client';
 
-const PostItem = ({ post }: { post: GetPostsResponseType[0] }) => {
+const PostItem = ({ post, showReactions = true }: { post: GetPostsResponseType[0]; showReactions?: boolean }) => {
     const router = useRouter();
     const [show, setShow] = useState(false);
 
@@ -72,23 +72,25 @@ const PostItem = ({ post }: { post: GetPostsResponseType[0] }) => {
                         </Grid>
                     </CardContent>
                 </CardActionArea>
-                <CardActions>
-                    <Grid container spacing={2} alignItems={"center"}>
-                        {Array.from(map).map(([key, arr]) => (
-                                <Grid item>
-                                    <Button onClick={() => addReaction(key)} color={arr.some((el) => el.user.email === session.user.email) ? "primary" : "secondary"} variant="outlined">
-                                        {arr.length} {key}
-                                    </Button>
-                                </Grid>
+                {showReactions && (
+                    <CardActions>
+                        <Grid container spacing={2} alignItems={"center"}>
+                            {Array.from(map).map(([key, arr]) => (
+                                    <Grid item>
+                                        <Button onClick={() => addReaction(key)} color={arr.some((el) => el.user.email === session.user.email) ? "primary" : "secondary"} variant="outlined">
+                                            {arr.length} {key}
+                                        </Button>
+                                    </Grid>
 
-                        ))}
-                        <Grid item>
-                            <Button variant="outlined" onClick={() => setShow(true)}>
-                                <AddRounded />
-                            </Button>
+                            ))}
+                            <Grid item>
+                                <Button variant="outlined" onClick={() => setShow(true)}>
+                                    <AddRounded />
+                                </Button>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </CardActions>
+                    </CardActions>
+                )}
             </Card>
         </Fragment>
     );
