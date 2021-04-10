@@ -1,5 +1,5 @@
-import { AppBar, Button, Container, Divider, Drawer, Grid, Hidden, IconButton, InputBase, List, ListItem, ListItemIcon, ListItemText, makeStyles, Toolbar, Typography, useMediaQuery } from "@material-ui/core";
-import { ExitToAppRounded, MailRounded, MenuRounded, SearchRounded } from "@material-ui/icons";
+import { AppBar, Button, Container, Divider, Drawer, Grid, Hidden, IconButton, InputBase, List, ListItem, ListItemIcon, ListItemText, ListSubheader, makeStyles, Toolbar, Typography, useMediaQuery } from "@material-ui/core";
+import { ExitToAppRounded, HomeRounded, MailRounded, MenuRounded, SearchRounded } from "@material-ui/icons";
 import { useSession } from "next-auth/client"
 import { Fragment, PropsWithChildren, useState } from "react";
 import { experimentalStyled as styled, alpha } from '@material-ui/core/styles';
@@ -147,6 +147,19 @@ export default function Navbar({ children }: PropsWithChildren<{}>) {
                     </Fragment>
                 )}
                 <List>
+                    <Link href="/">
+                        <ListItem button key={"home-button"}>
+                            <ListItemIcon>
+                                <HomeRounded />
+                            </ListItemIcon>
+                            <ListItemText primary={"Főoldal"} />
+                        </ListItem>
+                    </Link>
+                </List>
+                <Divider />
+                <List subheader={
+                    <ListSubheader component="div" id="nested-list-subheader">Kategóriák</ListSubheader>
+                }>
                     {!session && (
                         <Fragment>
                             <Link href="/auth/signin">

@@ -20,6 +20,12 @@ const IndexPage = () => {
                                     <Typography variant="h5" component="h2" gutterBottom>
                                         {post.title}
                                     </Typography>
+                                    <Typography gutterBottom noWrap>
+                                        {post.content}
+                                    </Typography>
+                                    <Typography>    
+                                        {`${post.author.image} ${post.author.name}`}
+                                    </Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card>

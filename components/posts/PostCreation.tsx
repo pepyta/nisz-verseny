@@ -1,4 +1,4 @@
-import { Button, Chip, Dialog, DialogContent, DialogTitle, Fab, FormControl, Grid, Grow, Input, InputLabel, makeStyles, MenuItem, Select, Tab, Tabs, TextField, useTheme } from "@material-ui/core";
+import { Avatar, Button, Checkbox, Chip, Dialog, DialogContent, DialogTitle, Fab, FormControl, Grid, Grow, Input, InputLabel, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, makeStyles, MenuItem, Select, Tab, Tabs, TextField, useTheme } from "@material-ui/core";
 import { AddRounded } from "@material-ui/icons";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
@@ -6,6 +6,8 @@ import MarkdownIt from "markdown-it";
 import PostsWrapper from "@lib/client/wrapper/posts";
 import { usePosts } from "@components/providers/PostsProvider";
 import { useSnackbar } from "notistack";
+import { useCategories } from "@components/providers/CategoryProvider";
+import Image from "next/image";
 
 const md = new MarkdownIt();
 
@@ -23,6 +25,8 @@ const PostCreation = () => {
     const wrapper = new PostsWrapper();
     const { addPost } = usePosts();
 
+    const { categories: cats } = useCategories();
+
     const { enqueueSnackbar } = useSnackbar();
 
     const create = async () => {
@@ -36,10 +40,15 @@ const PostCreation = () => {
             });
 
             addPost(resp.data);
+            setOpen(false);
+            setTitle("");
+            setSelected("INPUT");
+            setcontent("");
+            setCategories([]);
             enqueueSnackbar(resp.message, {
                 variant: "success",
             });
-        } catch(e) {
+        } catch (e) {
             enqueueSnackbar(e.message, {
                 variant: "error",
             });
@@ -87,7 +96,7 @@ const PostCreation = () => {
 
                                 >
                                     <Tab value={"INPUT"} label="Szöveg" />
-                                    <Tab value={"PREVIEW"} label="Előnézet" />
+                                    <Tab value={"PREVIEW"} label="Előnézet" disabled={content.length === 0} />
                                 </Tabs>
                                 {selected === "PREVIEW" && (
                                     <div style={{ margin: theme.spacing(2) }} dangerouslySetInnerHTML={{ __html: md.render(content) }} />
@@ -104,7 +113,33 @@ const PostCreation = () => {
                             )}
                         </Grid>
                         <Grid item xs={12}>
-
+                            <div style={{
+                                backgroundColor: "rgba(0,0,0,0.06)",
+                                borderRadius: theme.shape.borderRadius,
+                            }}>
+                                <List dense>
+                                    {cats.map((category) => (
+                                        <ListItem>
+                                            <ListItemAvatar style={{ height: 40, paddingTop: 4, paddingBottom: 4 }}>
+                                                <Image
+                                                    width={32}
+                                                    height={32}
+                                                    alt={category.name}
+                                                    src={`/img/icon/${category.id}.svg`}
+                                                />
+                                            </ListItemAvatar>
+                                            <ListItemText primary={category.name} />
+                                            <ListItemSecondaryAction>
+                                                <Checkbox
+                                                    edge="end"
+                                                    onChange={(e, checked) => checked ? setCategories([...categories, category.id]) : setCategories([...categories].filter((el) => el !== category.id))}
+                                                    checked={categories.includes(category.id)}
+                                                />
+                                            </ListItemSecondaryAction>
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            </div>
                         </Grid>
                         <Grid item xs={12} style={{ marginBottom: 16 }}>
                             <Button

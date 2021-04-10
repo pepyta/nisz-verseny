@@ -22,6 +22,9 @@ export default wrapper(async (req) => {
                 },
             },
         },
+        orderBy: {
+            createdAt: "desc",
+        },
     });
 
     return {
