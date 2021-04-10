@@ -1,6 +1,7 @@
 import wrapper from "../../../lib/server/endpoint";
 import prisma from "../../../lib/server/prisma";
 import getUser from "../../../lib/server/getUser";
+import { GetPostsResponseType } from "./get";
 
 export type CreatePostRequiredParameters = {
     title: string;
@@ -30,12 +31,20 @@ export default wrapper(async (req) => {
                 },
             },
         },
+        include: {
+            author: true,
+            PostCategoryConnector: {
+                include: {
+                    category: true
+                },
+            },
+        }
     });
 
     return {
-        message: "Sikeres",
-        data: {
-            post,
-        },
+        message: "Sikeresen létrehoztad a bejegyzést!",
+        data: post,
     };
 });
+
+export type CreatePostResponseType = GetPostsResponseType[0];
