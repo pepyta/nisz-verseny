@@ -10,6 +10,7 @@ import { SnackbarProvider } from 'notistack';
 import { useRouter } from 'next/router';
 import Navbar from '@components/navbar';
 import { Fragment } from 'react';
+import DiscussionsProvider from '@components/providers/DiscussionsWrapper';
 
 const theme = createMuiTheme({
     components: {
@@ -49,9 +50,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                                         />
                                     </Head>
                                     <IconProvider>
-                                        <Wrapper>    
-                                            <Component {...pageProps} />
-                                        </Wrapper>
+                                        <DiscussionsProvider>
+                                            <Wrapper>    
+                                                <Component {...pageProps} />
+                                            </Wrapper>
+                                        </DiscussionsProvider>
                                     </IconProvider>
                                 </ThemeProvider>
                             </SnackbarProvider>

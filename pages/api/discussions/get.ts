@@ -7,7 +7,7 @@ export default wrapper(async (req) => {
     const messages = await prisma.message.findMany({
         where: {
             sentat: {
-                lte: new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 7),
+                gte: new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 7),
             }
         },
         include: {

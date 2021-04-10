@@ -1,9 +1,13 @@
 import CategoryIcon from "@components/categories/CategoryIcon";
+import DiscussionCard from "@components/discussions/DiscussionCard";
 import Navbar from "@components/navbar";
 import PostItem from "@components/posts/PostItem";
 import { useCategories } from "@components/providers/CategoryProvider";
+import { useDiscussions } from "@components/providers/DiscussionsWrapper";
 import { usePosts } from "@components/providers/PostsProvider";
-import { Card, CardActions, CardContent, Container, createMuiTheme, Divider, Grid, Tab, Tabs, ThemeProvider, Typography } from "@material-ui/core";
+import DiscussionsWrapper from "@lib/client/wrapper/discussions";
+import { Card, CardActions, CardContent, Container, createMuiTheme, Divider, FilledInput, FormControl, Grid, IconButton, InputAdornment, InputLabel, List, ListItem, ListItemAvatar, ListItemText, Tab, Tabs, TextField, ThemeProvider, Typography } from "@material-ui/core";
+import { SendRounded } from "@material-ui/icons";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 
@@ -13,9 +17,11 @@ const CategoryPage = () => {
     const { categories } = useCategories();
     const [selected, setSelected] = useState<"POSTS" | "DISCUSSIONS">("POSTS");
     const { posts } = usePosts();
-
     const category = categories.find((el) => el.id === id);
+
     if (!category) return <Fragment />;
+
+    const wrapper = new DiscussionsWrapper();
 
     return (
         <ThemeProvider theme={createMuiTheme({ palette: { primary: { main: category.color, } } })}>
@@ -58,6 +64,13 @@ const CategoryPage = () => {
                                         </Grid>
                                     ))}
                                 </Grid>
+                            </Container>
+                        </Grid>
+                    )}
+                    {selected === "DISCUSSIONS" && (
+                        <Grid item xs={12}>
+                            <Container maxWidth="sm">
+                                <DiscussionCard category={category} />
                             </Container>
                         </Grid>
                     )}
