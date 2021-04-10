@@ -1,4 +1,4 @@
-import prisma from "../../../lib/server/prisma";
+import prisma from "@lib/server/prisma";
 import NextAuth from "next-auth";
 import Adapters from "next-auth/adapters";
 import Providers from "next-auth/providers";
