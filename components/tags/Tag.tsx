@@ -1,22 +1,14 @@
 import { Category } from ".prisma/client";
+import { useCategories } from "@components/providers/CategoryProvider";
 import { Grid, makeStyles } from "@material-ui/core";
-import Image from "next/image";
-import Vibrant from "node-vibrant";
-import NodeVibrant from "node-vibrant";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Tag = ({ category }: { category: Category }) => {
     const classes = useStyles();
-    const [color, setColor] = useState("#000");
-
-    
-    let v = new NodeVibrant(`/img/icon/${category.id}.svg`);
-    v.getPalette().then((palette) => {
-        setColor(palette.DarkVibrant.hex);
-    })
+    const { categories } = useCategories();
 
     return (
-        <div className={classes.root} style={{ backgroundColor: color }}>
+        <div className={classes.root} style={{ backgroundColor: categories.find((el) => category.id === el.id).color }}>
             <Grid container spacing={1} alignItems={"center"}>
                 <Grid item>    
                     {category.name}
