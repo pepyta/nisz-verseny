@@ -11,6 +11,10 @@ export default NextAuth({
     jwt: {
         signingKey: `{"kty":"oct","kid":"Dl893BEV-iVE-x9EC52TDmlJUgGm9oZ99_ZL025Hc5Q","alg":"HS512","k":"K7QqRmJOKRK2qcCKV_pi9PSBv3XP0fpTu30TP8xn4w01xR3ZMZM38yL2DnTVPVw6e4yhdh0jtoah-i4c_pZagA"}`,
     },
+    pages: {
+        signIn: "/auth/signin",
+        error: "/auth/error",
+    },
     providers: [
         Providers.Credentials({
             name: "Credentials",

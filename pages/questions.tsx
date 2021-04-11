@@ -2,8 +2,9 @@ import { PostForm } from "@components/posts/PostCreation";
 import { useQuestions } from "@components/providers/QuestionsProvider";
 import QuestionCard from "@components/questions/QuestionCard";
 import QuestionsWrapper from "@lib/client/wrapper/questions";
-import { Container, Dialog, DialogContent, DialogTitle, Fab, Grid } from "@material-ui/core";
+import { Container, Dialog, DialogContent, DialogTitle, Fab, Grid, Tab, Tabs } from "@material-ui/core";
 import { AddRounded } from "@material-ui/icons";
+import { useSession } from "next-auth/client";
 import { useSnackbar } from "notistack";
 import { Fragment, useState } from "react";
 
@@ -66,12 +67,22 @@ export const QuestionCreation = () => {
 const QuestionsPage = () => {
     const { questions } = useQuestions();
 
+    const [selected, setSelected] = useState<"ALL" | "MY" | "SOLVED" | "OPEN">("ALL");
+    const [session] = useSession();
+
+
     return (
         <Fragment>
             <QuestionCreation />
             <Container maxWidth="sm">
+                <Tabs scrollButtons="auto" value={selected} onChange={(e, val) => setSelected(val)}>
+                    <Tab value={"ALL"} label={"Összes"} />
+                    <Tab value={"MY"} label={"Saját kérdések"} />
+                    <Tab value={"SOLVED"} label={"Megoldottak"} />
+                    <Tab value={"OPEN"} label={"Nyitottak"} />
+                </Tabs>
                 <Grid container spacing={2}>
-                    {questions.map((question) => (
+                    {(selected == "MY" ? questions.filter((el) => el.user.email === session.user.email) : selected == "SOLVED" ? questions.filter((el) => el.answers.some(({ marked }) => marked)) : selected == "OPEN" ? questions.filter((el) => !el.answers.some(({ marked }) => marked)) : questions).map((question) => (
                         <Grid item xs={12}>
                             <QuestionCard question={question} />
                         </Grid>
