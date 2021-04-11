@@ -1,7 +1,7 @@
 import { Button, Card, CardContent, Container, Grid, makeStyles, TextField, Typography, Paper} from "@material-ui/core";
 import { signIn, useSession } from "next-auth/client";
 import { useSnackbar } from "notistack";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 const SigninPage = () => {
@@ -13,6 +13,11 @@ const SigninPage = () => {
     const { enqueueSnackbar } = useSnackbar();
 
     const router = useRouter();
+    const error = router.query.error+"";
+    
+    useEffect(() => {
+        enqueueSnackbar(error, { variant: "error" });
+    }, []);
 
     if(session) router.push("/");
 
