@@ -1,7 +1,7 @@
 import QuestionsWrapper from "@lib/client/wrapper/questions";
 import { CreateAnswerResponseType } from "@pages/api/questions/answer";
 import { GetQuestionsResponseType } from "@pages/api/questions/get";
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useState } from "react";
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useState } from "react";
 
 type QuestionsContextType = {
     questions: GetQuestionsResponseType;
@@ -58,6 +58,10 @@ const QuestionsProvider = ({ children }: PropsWithChildren<{}>) => {
             setQuestions(resp.data);
         } catch {}
     };
+
+    useEffect(() => {
+        load();
+    }, []);
 
     return (
         <QuestionsContext.Provider value={{ questions, setQuestions}}>

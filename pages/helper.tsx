@@ -88,14 +88,14 @@ const helpPage = () => {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                <Grid container spacing={1}>
+                <Grid container>
                     <Grid item xs={6}>
                         <Card className={kartyaClass.root}>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
                                     alt="Bejegyzés készítése"
-                                    height="200"
+                                    height="220"
                                     image="/img/gif/bejegyzeskeszit.gif"
                                     title="Bejegyzés készítése"
                                 />
@@ -117,17 +117,17 @@ const helpPage = () => {
                                 <CardMedia
                                     component="img"
                                     alt="Bejegyzés készítése"
-                                    height="200"
+                                    height="220"
                                     image="/img/gif/bejegyzestorles.gif"
                                     title="Bejegyzés készítése"
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h6" component="h2">
-                                        Bejegyzés készítése
+                                        Bejegyzés törlése
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        Bejegyzés készitése nagyon egyszerű, csak kattintsunk a "bejegyzés létrehozása"
-                                        gombra, majd töltsük ki a kért adatokat.
+                                        Bejegyzést úgy tudunk törölni, hogy a posztunkban rákattintunk a három pontra,
+                                        majd a törlést választjuk.
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>

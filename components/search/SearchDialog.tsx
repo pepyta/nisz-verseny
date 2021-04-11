@@ -5,19 +5,60 @@ import { usePosts } from "@components/providers/PostsProvider";
 import PostItem from "@components/posts/PostItem";
 import Link from "next/link";
 import Image from "next/image";
+import { useQuestions } from "@components/providers/QuestionsProvider";
+import { GetPostsResponseType } from "@pages/api/posts/get";
+import { GetQuestionsResponseType } from "@pages/api/questions/get";
+import QuestionCard from "@components/questions/QuestionCard";
 
 const SearchDialog = ({ open, setOpen }: { open: boolean; setOpen: Dispatch<SetStateAction<boolean>> }) => {
     const theme = useTheme();
     const { posts } = usePosts();
+    const { questions } = useQuestions();
     const [search, setSearch] = useState("");
 
-    const fuse = new Fuse(posts.map((post) => ({
-        author: post.author.name,
-        title: post.title,
-        content: post.content,
-        categories: post.PostCategoryConnector.map(({ category }) => category),
-        original: post,
-    })), {
+    const generize = (posts: GetPostsResponseType, questions: GetQuestionsResponseType) => {
+        const resp: ({
+            title: string;
+            content: string;
+            author: string;
+            categories: string[];
+            type: "POST";
+            original: GetPostsResponseType[0];
+        } | {
+            title: string;
+            content: string;
+            author: string;
+            categories: string[];
+            type: "QUESTION";
+            original: GetQuestionsResponseType[0];
+        })[] = [];
+
+        posts.forEach((post) => {
+            resp.push({
+                title: post.title,
+                content: post.content+"",
+                author: post.author.name,
+                type: "POST",
+                categories: post.PostCategoryConnector.map(({ category }) => category.name),
+                original: post,
+            });
+        });
+
+        questions.forEach((question) => {
+            resp.push({
+                title: question.title,
+                content: question.content+"",
+                author: question.user.name,
+                type: "QUESTION",
+                categories: question.QuestionCategoryConnector.map(({ category }) => category.name),
+                original: question,
+            });
+        });
+
+        return resp;
+    };
+
+    const fuse = new Fuse(generize(posts, questions), {
         keys: ["author", "title", "content", "categories.name"],
     });
     
@@ -62,7 +103,11 @@ const SearchDialog = ({ open, setOpen }: { open: boolean; setOpen: Dispatch<SetS
                             results.map((result) => (
                                 <Link href={`/posts/${result.item.original.id}`}>
                                     <Grid item xs={12} onClick={() => setOpen(false)}>
-                                        <PostItem post={result.item.original} showReactions={false} />
+                                        {result.item.type === "POST" ? (
+                                            <PostItem post={result.item.original} showReactions={false} />
+                                        ) : (
+                                            <QuestionCard question={result.item.original} />
+                                        )}    
                                     </Grid>
                                 </Link>
                             ))

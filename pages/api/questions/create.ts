@@ -3,6 +3,7 @@ import { Answer } from ".prisma/client";
 import wrapper from "@lib/server/endpoint";
 import getUser from "@lib/server/getUser";
 import prisma from "@lib/server/prisma";
+import { GetQuestionsResponseType } from "./get";
 
 export type CreateQuestionRequiredParameters = {
     title: string;
@@ -15,7 +16,7 @@ export default wrapper(async (req) => {
 
     const { content, title, categories }: CreateQuestionRequiredParameters = JSON.parse(req.body);
     
-    const question = await prisma.question.create({
+    const question: CreateQuestionResponseType = await prisma.question.create({
         data: {
             content,
             title,
@@ -50,6 +51,4 @@ export default wrapper(async (req) => {
     };
 });
 
-export type CreateQuestionResponseType = Answer & {
-    user: User;
-};
+export type CreateQuestionResponseType = GetQuestionsResponseType[0];
