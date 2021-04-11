@@ -8,14 +8,13 @@ import Box from '@material-ui/core/Box';
 import HelpIcon from '@material-ui/icons/Help';
 import FolderIcon from '@material-ui/icons/Folder';
 import ChatIcon from '@material-ui/icons/Chat';
-import { Card, CardActionArea, CardContent, CardMedia, Grid } from '@material-ui/core';
+import { Button, Card, CardActionArea, CardContent, CardMedia, Dialog, DialogContent, DialogContentText, DialogTitle, Grid } from '@material-ui/core';
 
 interface TabPanelProps {
     children?: React.ReactNode;
     index: any;
     value: any;
 }
-
 function TabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
 
@@ -69,6 +68,16 @@ const helpPage = () => {
         setValue(newValue);
     };
 
+    /* const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    }; */
+
     return (
         <div className={tabClass.root}>
             <AppBar position="static" color="default">
@@ -88,50 +97,144 @@ const helpPage = () => {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                <Grid container>
+                <Grid container spacing = {3}>
                     <Grid item xs={6}>
-                        <Card className={kartyaClass.root}>
-                            <CardActionArea>
-                                <CardMedia
-                                    component="img"
-                                    alt="Bejegyzés készítése"
-                                    height="220"
-                                    image="/img/gif/bejegyzeskeszit.gif"
-                                    title="Bejegyzés készítése"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" component="h2">
-                                        Bejegyzés készítése
+                        {/* <Button onClick={handleClickOpen}> */}
+                            <Card className={kartyaClass.root}>
+                                <CardActionArea>
+                                    <CardMedia
+                                        component="img"
+                                        alt="Bejegyzés készítése"
+                                        height="220"
+                                        image="/img/gif/bejegyzeskeszit.gif"
+                                        title="Bejegyzés készítése"
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h6" component="h2">
+                                            Bejegyzés készítése
                                     </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        Bejegyzés készitése nagyon egyszerű, csak kattintsunk a "bejegyzés létrehozása"
-                                        gombra, majd töltsük ki a kért adatokat.
+                                        <Typography variant="body2" color="textSecondary" component="p">
+                                            Bejegyzés készitése nagyon egyszerű, csak kattintsunk a "bejegyzés létrehozása"
+                                            gombra, majd töltsük ki a kért adatokat.
                                     </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
+                        {/* </Button> */}
+                        {/* <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+
+                        >
+                            <DialogContent style={{ backgroundImage: 'url("/img/gif/bejegyzeskeszit.gif")', backgroundRepeat: 'no-repeat' }}>
+                                <DialogContentText id="alert-dialog-description"
+                                    style={
+                                        {
+                                            width: '550px',
+                                            height: '300px'
+                                        }
+                                    }
+                                >
+                                </DialogContentText>
+                            </DialogContent>
+                        </Dialog> */}
                     </Grid>
                     <Grid item xs={6}>
+                        {/* <Button onClick={handleClickOpen}> */}
+                            <Card className={kartyaClass.root}>
+                                <CardActionArea>
+                                    <CardMedia
+                                        component="img"
+                                        alt="Bejegyzés törlése"
+                                        height="220"
+                                        image="/img/gif/bejegyzestorles.gif"
+                                        title="Bejegyzés törlése"
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h6" component="h2">
+                                            Bejegyzés törlése
+                                    </Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">
+                                            Bejegyzést úgy tudunk törölni, hogy a posztunkban rákattintunk a három pontra,
+                                            majd a törlést választjuk.
+                                    </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
+                        {/* </Button> */}
+                        
+                        {/* <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+
+                        >
+                            <DialogContent style={{ backgroundImage: 'url("/img/gif/bejegyzestorles.gif")', backgroundRepeat: 'no-repeat' }}>
+                                <DialogContentText id="alert-dialog-description"
+                                    style={
+                                        {
+                                            width: '550px',
+                                            height: '300px'
+                                        }
+                                    }
+                                >
+                                </DialogContentText>
+                            </DialogContent>
+                        </Dialog> */}
+                        
+                    </Grid>
+                    <Grid item xs = {3}>
+
+                    </Grid>
+                    <Grid item xs = {6}>
+                        {/* <Button onClick={handleClickOpen}> */}
                         <Card className={kartyaClass.root}>
-                            <CardActionArea>
-                                <CardMedia
-                                    component="img"
-                                    alt="Bejegyzés készítése"
-                                    height="220"
-                                    image="/img/gif/bejegyzestorles.gif"
-                                    title="Bejegyzés készítése"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h6" component="h2">
-                                        Bejegyzés törlése
+                                <CardActionArea>
+                                    <CardMedia
+                                        component="img"
+                                        alt="Bejegyzés szerkesztése"
+                                        height="220"
+                                        image="/img/gif/bejegyzesszerk.gif"
+                                        title="Bejegyzés szerkesztése"
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h6" component="h2">
+                                            Bejegyzés törlése
                                     </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        Bejegyzést úgy tudunk törölni, hogy a posztunkban rákattintunk a három pontra,
-                                        majd a törlést választjuk.
+                                        <Typography variant="body2" color="textSecondary" component="p">
+                                            Bejegyzést úgy tudunk törölni, hogy a posztunkban rákattintunk a három pontra,
+                                            majd a törlést választjuk.
                                     </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
+                        {/* </Button> */}
+                        
+                        {/* <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+
+                        >
+                            <DialogContent style={{ backgroundImage: 'url("/img/gif/bejegyzestorles.gif")', backgroundRepeat: 'no-repeat' }}>
+                                <DialogContentText id="alert-dialog-description"
+                                    style={
+                                        {
+                                            width: '550px',
+                                            height: '300px'
+                                        }
+                                    }
+                                >
+                                </DialogContentText>
+                            </DialogContent>
+                        </Dialog> */}
+                    </Grid>
+                    <Grid item xs = {3}>
+                        
                     </Grid>
                 </Grid>
 
