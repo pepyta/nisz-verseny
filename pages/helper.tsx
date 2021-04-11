@@ -310,8 +310,8 @@ const helpPage = () => {
                                         Kérdezés
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        Bejegyzés készitése nagyon egyszerű, csak kattintsunk a "bejegyzés létrehozása"
-                                        gombra, majd töltsük ki a kért adatokat.
+                                        Kérdés feltevéséhez rá kell hogy nyomjunk a kérdések és válaszok menüpontra a bal oldalt,
+                                        majd jobb alul a "kérdés létrehozása" gombra kattintva feltehetjük kérdésünket.
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -353,8 +353,8 @@ const helpPage = () => {
                                         Válaszolás
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        Bejegyzést úgy tudunk törölni, hogy a posztunkban rákattintunk a három pontra,
-                                        majd a törlést választjuk.
+                                        Kérdések megválaszolásához nyomjunk rá a bal oldalon található "kérdések és válaszok"
+                                        menüpontra, majd a nyitott kérdések közül válogathatunk.
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
