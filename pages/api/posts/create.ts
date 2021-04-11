@@ -38,7 +38,12 @@ export default wrapper(async (req) => {
                     category: true
                 },
             },
-        }
+            reactions: {
+                include: {
+                    user: true,
+                }
+            },
+        },
     });
 
     return {
