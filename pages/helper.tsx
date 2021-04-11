@@ -3,14 +3,12 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import PhoneIcon from '@material-ui/icons/Phone';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import HelpIcon from '@material-ui/icons/Help';
 import FolderIcon from '@material-ui/icons/Folder';
 import ChatIcon from '@material-ui/icons/Chat';
+import { Card, CardActionArea, CardContent, CardMedia, Grid } from '@material-ui/core';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -45,7 +43,7 @@ function a11yProps(index: any) {
     };
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const tabhoz = makeStyles((theme: Theme) => ({
     root: {
         flexGrow: 1,
         width: '100%',
@@ -53,8 +51,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
+const kartyahoz = makeStyles({
+    root: {
+        maxWidth: '80%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    }
+
+})
+
 const helpPage = () => {
-    const classes = useStyles();
+    const tabClass = tabhoz();
+    const kartyaClass = kartyahoz();
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -62,7 +70,7 @@ const helpPage = () => {
     };
 
     return (
-        <div className={classes.root}>
+        <div className={tabClass.root}>
             <AppBar position="static" color="default">
                 <Tabs
                     value={value}
@@ -79,14 +87,60 @@ const helpPage = () => {
                     <Tab label="Kérdések" icon={<HelpIcon />} {...a11yProps(2)} />
                 </Tabs>
             </AppBar>
-        <TabPanel value={value} index={0}>
-                Item One
+            <TabPanel value={value} index={0}>
+                <Grid container>
+                    <Grid item xs={6}>
+                        <Card className={kartyaClass.root}>
+                            <CardActionArea>
+                                <CardMedia
+                                    component="img"
+                                    alt="Bejegyzés készítése"
+                                    height="220"
+                                    image="/img/gif/bejegyzeskeszit.gif"
+                                    title="Bejegyzés készítése"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h6" component="h2">
+                                        Bejegyzés készítése
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        Bejegyzés készitése nagyon egyszerű, csak kattintsunk a "bejegyzés létrehozása"
+                                        gombra, majd töltsük ki a kért adatokat.
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Card className={kartyaClass.root}>
+                            <CardActionArea>
+                                <CardMedia
+                                    component="img"
+                                    alt="Bejegyzés készítése"
+                                    height="220"
+                                    image="/img/gif/bejegyzestorles.gif"
+                                    title="Bejegyzés készítése"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h6" component="h2">
+                                        Bejegyzés törlése
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        Bejegyzést úgy tudunk törölni, hogy a posztunkban rákattintunk a három pontra,
+                                        majd a törlést választjuk.
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                </Grid>
+
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                Item Two
         </TabPanel>
-        <TabPanel value={value} index={1}>
-               Item Two
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-               Item Three
+            <TabPanel value={value} index={2}>
+                Item Three
         </TabPanel>
         </div>
     );
