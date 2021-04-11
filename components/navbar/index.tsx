@@ -1,5 +1,5 @@
 import { AppBar, Button, Card, CardContent, Container, Dialog, Divider, Drawer, Grid, Hidden, IconButton, InputBase, List, ListItem, ListItemIcon, ListItemText, ListSubheader, makeStyles, Menu, MenuItem, Popover, StylesProvider, Toolbar, Typography, useMediaQuery } from "@material-ui/core";
-import { ExitToAppRounded, HistoryRounded, HomeRounded, MenuRounded, SearchRounded } from "@material-ui/icons";
+import { ChatRounded, ExitToAppRounded, HistoryRounded, HomeRounded, MenuRounded, SearchRounded } from "@material-ui/icons";
 import { useSession } from "next-auth/client"
 import { Fragment, PropsWithChildren, useState } from "react";
 import { experimentalStyled as styled, alpha, useTheme } from '@material-ui/core/styles';
@@ -240,6 +240,14 @@ export default function Navbar({ children }: PropsWithChildren<{}>) {
                             </ListItem>
                         </Link>
                     )}
+                    <Link href="/questions">
+                        <ListItem button key={"questions-button"}>
+                            <ListItemIcon>
+                                <ChatRounded />
+                            </ListItemIcon>
+                            <ListItemText primary={"Kérdések és válaszok"} />
+                        </ListItem>
+                    </Link>
                 </List>
                 {!session && (
                     <Fragment>

@@ -37,7 +37,7 @@ export const useQuestions = () => {
                         const answ = questions[i].answers[j];
 
                         if(answ.id === answer.id) {
-                            answ.marked = true;
+                            questions[i].answers[j].marked = true;
                         }
                     }
                 }

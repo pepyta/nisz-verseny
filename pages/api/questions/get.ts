@@ -24,7 +24,7 @@ export default wrapper(async (req) => {
     });
 
     return {
-        data: questions,
+        data: questions.reverse(),
     };
 });
 

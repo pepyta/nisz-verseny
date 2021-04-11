@@ -48,7 +48,7 @@ export const QuestionCreation = () => {
 
     return (
         <Fragment>
-            <Fab variant="extended" onClick={() => setOpen(true)} style={{ position: "fixed", bottom: 32, right: 32 }}>
+            <Fab color="primary" variant="extended" onClick={() => setOpen(true)} style={{ position: "fixed", bottom: 32, right: 32 }}>
                 <AddRounded /> Kérdés létrehozása
             </Fab>
             <Dialog open={open} onClose={() => setOpen(false)}>
