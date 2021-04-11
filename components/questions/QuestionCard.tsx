@@ -28,7 +28,7 @@ const QuestionCard = ({ question }: { question: GetQuestionsResponseType[0] }) =
                             </Grid>
 
                         </Typography>
-                        <Typography gutterBottom>
+                        <Typography gutterBottom noWrap>
                             {question.content}
                         </Typography>
                         <Grid container spacing={2}>
