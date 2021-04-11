@@ -105,7 +105,7 @@ const helpPage = () => {
                                     <CardMedia
                                         component="img"
                                         alt="Bejegyzés készítése"
-                                        height="220"
+                                        height="100%"
                                         image="/img/gif/bejegyzeskeszit.gif"
                                         title="Bejegyzés készítése"
                                     />
@@ -148,7 +148,7 @@ const helpPage = () => {
                                     <CardMedia
                                         component="img"
                                         alt="Bejegyzés törlése"
-                                        height="220"
+                                        height="100%"
                                         image="/img/gif/bejegyzestorles.gif"
                                         title="Bejegyzés törlése"
                                     />
@@ -196,17 +196,17 @@ const helpPage = () => {
                                     <CardMedia
                                         component="img"
                                         alt="Bejegyzés szerkesztése"
-                                        height="220"
+                                        height="100%"
                                         image="/img/gif/bejegyzesszerk.gif"
                                         title="Bejegyzés szerkesztése"
                                     />
                                     <CardContent>
                                         <Typography gutterBottom variant="h6" component="h2">
-                                            Bejegyzés törlése
+                                            Bejegyzés szerkesztése
                                     </Typography>
                                         <Typography variant="body2" color="textSecondary" component="p">
-                                            Bejegyzést úgy tudunk törölni, hogy a posztunkban rákattintunk a három pontra,
-                                            majd a törlést választjuk.
+                                        Bejegyzést úgy tudunk törölni, hogy a posztunkban rákattintunk a három pontra,
+                                            majd a szerkesztést választjuk.
                                     </Typography>
                                     </CardContent>
                                 </CardActionArea>
