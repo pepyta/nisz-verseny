@@ -46,7 +46,6 @@ const tabhoz = makeStyles((theme: Theme) => ({
     root: {
         flexGrow: 1,
         width: '100%',
-        backgroundColor: theme.palette.background.paper,
     },
 }));
 
@@ -90,6 +89,7 @@ const helpPage = () => {
                     textColor="primary"
                     aria-label="scrollable force tabs example"
                     centered
+                    style={{ borderRadius: 12, }}
                 >
                     <Tab label="Bejegyzések" icon={<FolderIcon />} {...a11yProps(0)} />
                     <Tab label="Beszélgetés" icon={<ChatIcon />} {...a11yProps(1)} />
@@ -106,7 +106,7 @@ const helpPage = () => {
                                     component="img"
                                     alt="Bejegyzés készítése"
                                     height="100%"
-                                    image="/img/gif/bejegyzeskeszit.gif"
+                                    image="/img/gif/bejegyzesKeszit.gif"
                                     title="Bejegyzés készítése"
                                 />
                                 <CardContent>
@@ -149,7 +149,7 @@ const helpPage = () => {
                                     component="img"
                                     alt="Bejegyzés törlése"
                                     height="100%"
-                                    image="/img/gif/bejegyzestorles.gif"
+                                    image="/img/gif/bejegyzesTorles.gif"
                                     title="Bejegyzés törlése"
                                 />
                                 <CardContent>
@@ -197,7 +197,7 @@ const helpPage = () => {
                                     component="img"
                                     alt="Bejegyzés szerkesztése"
                                     height="100%"
-                                    image="/img/gif/bejegyzesszerk.gif"
+                                    image="/img/gif/bejegyzesSzerk.gif"
                                     title="Bejegyzés szerkesztése"
                                 />
                                 <CardContent>

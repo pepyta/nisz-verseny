@@ -23,7 +23,7 @@ const PostItem = ({ post, showReactions = true }: { post: GetPostsResponseType[0
 
     const map: Map<string, CreateReactionResponseType[]> = new Map();
 
-    post.reactions.forEach((reaction) => {
+    (post.reactions || []).forEach((reaction) => {
         map.set(reaction.emoji, [...(map.has(reaction.emoji) ? map.get(reaction.emoji) : []), reaction]);
     });
 

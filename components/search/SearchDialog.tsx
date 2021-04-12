@@ -33,7 +33,7 @@ const SearchDialog = ({ open, setOpen }: { open: boolean; setOpen: Dispatch<SetS
             original: GetQuestionsResponseType[0];
         })[] = [];
 
-        posts.forEach((post) => {
+        (posts || []).forEach((post) => {
             resp.push({
                 title: post.title,
                 content: post.content+"",
@@ -44,7 +44,7 @@ const SearchDialog = ({ open, setOpen }: { open: boolean; setOpen: Dispatch<SetS
             });
         });
 
-        questions.forEach((question) => {
+        (questions || []).forEach((question) => {
             resp.push({
                 title: question.title,
                 content: question.content+"",
